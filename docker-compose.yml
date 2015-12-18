@@ -1,5 +1,5 @@
 web:
-  build: .
+  build: ../docker-glytoucan
   ports:
    - "90:80"
   volumes:
