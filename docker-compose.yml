@@ -51,13 +51,6 @@ java:
     - stanza:stanza.glytoucan.org
 #    - local:local.glytoucan.org
   restart: always
-stanzaredirect:
-  build: ${WORKSPACE_PARENT}/workspace/docker-apache-stanza.redirect
-  ports:
-    - 9293:80
-  volumes:
-    - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
-  restart: always
 stanza:
   build: ${WORKSPACE_PARENT}/workspace/docker-glytoucan-stanza
   ports:
@@ -65,7 +58,6 @@ stanza:
   volumes:
     - ${JENKINS_WORKSPACE_PARENT}/workspace:/app
   links:
-    - stanzaredirect:test.ts.glytoucan.org
     - api:rdf.glytoucan.org
   restart: always
 local:
