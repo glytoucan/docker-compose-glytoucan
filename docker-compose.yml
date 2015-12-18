@@ -1,5 +1,5 @@
 web:
-  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-glytoucan
+  build: ${WORKSPACE_PARENT}/workspace/docker-glytoucan
   ports:
    - "90:80"
   volumes:
@@ -12,7 +12,7 @@ web:
    - stanza:stanza.glytoucan.org
   restart: always
 glyspace:
-  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-glyspace
+  build: ${WORKSPACE_PARENT}/workspace/docker-glyspace
   ports:
    - "8080:80"
   volumes:
@@ -29,7 +29,7 @@ squid:
    - java:rdf.glytoucan.org
   restart: always
 java:
-  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-rdf.glytoucan
+  build: ${WORKSPACE_PARENT}/workspace/docker-rdf.glytoucan
   ports:
    - 81:80
   volumes:
@@ -52,14 +52,14 @@ java:
 #    - local:local.glytoucan.org
   restart: always
 stanzaredirect:
-  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-apache-stanza.redirect
+  build: ${WORKSPACE_PARENT}/workspace/docker-apache-stanza.redirect
   ports:
     - 9293:80
   volumes:
     - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
   restart: always
 stanza:
-  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-glytoucan-stanza
+  build: ${WORKSPACE_PARENT}/workspace/docker-glytoucan-stanza
   ports:
     - 9292:80
   volumes:
@@ -69,7 +69,7 @@ stanza:
     - api:rdf.glytoucan.org
   restart: always
 local:
-  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-local.glytoucan
+  build: ${WORKSPACE_PARENT}/workspace/docker-local.glytoucan
   ports:
     - 88:80
   volumes:
