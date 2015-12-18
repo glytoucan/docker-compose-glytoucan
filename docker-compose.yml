@@ -51,7 +51,7 @@ java:
 stanzaredirect:
   build: ../docker-apache-stanza.redirect
   ports:
-    - 9292:80
+    - 9293:80
   volumes:
     - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
 stanza:
