@@ -17,6 +17,7 @@ glyspace:
    - "8080:80"
   volumes:
    - /etc/localtime:/etc/localtime
+  restart: always
 squid:
   build: ../docker-glyspacesquid
   ports:
@@ -26,6 +27,7 @@ squid:
    - /opt/squid/log:/var/log/squid3
   links:
    - java:rdf.glytoucan.org
+  restart: always
 java:
   build: ../docker-rdf.glytoucan
   ports:
@@ -48,12 +50,14 @@ java:
   links:
     - stanza:stanza.glytoucan.org
 #    - local:local.glytoucan.org
+  restart: always
 stanzaredirect:
   build: ../docker-apache-stanza.redirect
   ports:
     - 9293:80
   volumes:
     - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
+  restart: always
 stanza:
   build: ../docker-glytoucan-stanza
   ports:
@@ -63,6 +67,7 @@ stanza:
   links:
     - stanzaredirect:test.ts.glytoucan.org
     - api:rdf.glytoucan.org
+  restart: always
 local:
   build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-local.glytoucan
   ports:
@@ -71,6 +76,7 @@ local:
     - /mnt/jenkins/workspace/local.glytoucan:/var/www/html
   links:
     - local_mariadb:local.glytoucan.org
+  restart: always
 local_mariadb:
   image: mariadb
   ports:
@@ -83,6 +89,7 @@ local_mariadb:
     - MYSQL_ROOT_PASSWORD
     - MYSQL_PASSWORD
     - MYSQL_DATABASE=glytoucan_localization
+  restart: always
 user_virtuoso:
   build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-virtuoso
   ports:
@@ -91,6 +98,7 @@ user_virtuoso:
   volumes:
     - /etc/localtime:/etc/localtime
     - /opt/virtuoso_user:/virtuoso
+  restart: always
 api:
   image: maven:3.3.3-jdk-8
   ports:
@@ -115,3 +123,4 @@ api:
    - SPRING_MAIL_PASSWORD
    - SPRING_TRIPLESTORE_PASSWORD
    - SPRING_TRIPLESTORE_URL
+  restart: always
