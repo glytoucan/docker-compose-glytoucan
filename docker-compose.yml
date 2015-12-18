@@ -48,6 +48,12 @@ java:
   links:
     - stanza:stanza.glytoucan.org
 #    - local:local.glytoucan.org
+stanzaredirect:
+  build: ../docker-apache-stanza.redirect
+  ports:
+    - 9292:80
+  volumes:
+    - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
 stanza:
   build: ../docker-glytoucan-stanza
   ports:
@@ -57,10 +63,6 @@ stanza:
   links:
     - stanzaredirect:test.ts.glytoucan.org
     - api:rdf.glytoucan.org
-stanzaredirect:
-  build: ../docker-apache-stanza.redirect
-  volumes:
-    - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
 local:
   build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-local.glytoucan
   ports:
