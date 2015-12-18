@@ -1,0 +1,115 @@
+web:
+  build: .
+  ports:
+   - "90:80"
+  volumes:
+   - /opt/glytoucan/apacherun:/var/run/apache2
+   - /opt/glytoucan/apachelogs:/var/log/apache2
+   - /etc/localtime:/etc/localtime
+  links:
+   - glyspace:test.glytoucan.org
+   - squid:rdf.glytoucan.org
+   - stanza:stanza.glytoucan.org
+  restart: always
+glyspace:
+  build: ../docker-glyspace
+  ports:
+   - "8080:80"
+  volumes:
+   - /etc/localtime:/etc/localtime
+squid:
+  build: ../docker-glyspacesquid
+  ports:
+   - "3180:80"
+   - "3128:28"
+  volumes:
+   - /opt/squid/log:/var/log/squid3
+  links:
+   - java:rdf.glytoucan.org
+java:
+  build: ../docker-rdf.glytoucan
+  ports:
+   - 81:80
+  volumes:
+   - /opt/rdf.glytoucan.org/tmp:/tmp
+   - /opt/rdf.glytoucan.org/maven:/root/.m2
+   - ${WORKSPACE_PARENT}/workspace/${RDF_GLYTOUCAN}:/workspace
+   - /opt/rdf.glytoucan.org/upload:/upload
+   - /etc/localtime:/etc/localtime
+  working_dir: /workspace
+  #env_file: glytoucan.env
+  environment:
+   - GOOGLE_OAUTH2_CLIENTID
+   - GOOGLE_OAUTH2_CLIENTSECRET
+   - SPRING_MAIL_USERNAME
+   - SPRING_MAIL_PASSWORD
+   - SPRING_TRIPLESTORE_PASSWORD
+   - SPRING_TRIPLESTORE_URL
+  links:
+    - stanza:stanza.glytoucan.org
+#    - local:local.glytoucan.org
+stanza:
+  build: ../docker-glytoucan-stanza
+  ports:
+    - 9292:80
+  volumes:
+    - ${JENKINS_WORKSPACE_PARENT}/workspace:/app
+  links:
+    - stanzaredirect:test.ts.glytoucan.org
+    - api:rdf.glytoucan.org
+stanzaredirect:
+  build: ../docker-apache-stanza.redirect
+  volumes:
+    - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
+local:
+  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-local.glytoucan
+  ports:
+    - 88:80
+  volumes:
+    - /mnt/jenkins/workspace/local.glytoucan:/var/www/html
+  links:
+    - local_mariadb:local.glytoucan.org
+local_mariadb:
+  image: mariadb
+  ports:
+    - 3306:3306
+  volumes:
+    - /mnt/localization/mariadb/lib:/var/lib/mysql
+#  env_file: glytoucan.env
+  environment:
+    - MYSQL_USER=local
+    - MYSQL_ROOT_PASSWORD
+    - MYSQL_PASSWORD
+    - MYSQL_DATABASE=glytoucan_localization
+user_virtuoso:
+  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-virtuoso
+  ports:
+    - 1110:1111
+    - 8889:8890
+  volumes:
+    - /etc/localtime:/etc/localtime
+    - /opt/virtuoso_user:/virtuoso
+api:
+  image: maven:3.3.3-jdk-8
+  ports:
+    - 881:80
+  volumes:
+    - /opt/api.glytoucan/maven:/root/.m2
+    - ${WORKSPACE_PARENT}/workspace/${API_GLYTOUCAN}:/workspace
+  working_dir: /workspace
+  command: mvn -U spring-boot:run
+  environment:
+   - SERVER_PORT
+   - MAIL_ADDRESS_FROM
+   - MAIL_ADDRESS_ADMIN
+   - MAIL_BODY_NEWREGISTRATION
+   - MAIL_BODY_NOTIFYREGISTRATION
+   - MAIL_SUBJECT_NEWREGISTRATION
+   - MAIL_SUBJECT_NOTIFYREGISTRATION
+   - MSDB_RDF
+   - GOOGLE_OAUTH2_CLIENTID
+   - GOOGLE_OAUTH2_CLIENTSECRET
+   - SPRING_MAIL_USERNAME
+   - SPRING_MAIL_PASSWORD
+   - SPRING_TRIPLESTORE_PASSWORD
+   - SPRING_TRIPLESTORE_URL
