@@ -54,7 +54,7 @@ java:
 stanza:
   build: ${WORKSPACE_PARENT}/workspace/docker-glytoucan-stanza
   ports:
-    - 9292:9292
+    - 9292:80
   volumes: 
   # the dockerfile uses app/glytoucan-stanza so glytoucan-stanza should be in workspace
     - ${JENKINS_WORKSPACE_PARENT}/workspace:/app
