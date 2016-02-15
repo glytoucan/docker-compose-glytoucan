@@ -24,7 +24,8 @@ squid:
    - "3180:80"
    - "3128:28"
   volumes:
-   - /opt/squid/log:/var/log/squid3
+   - /opt/glytoucan/squid/log:/var/log/squid3
+   - /opt/glytoucan/squid/cache:/var/spool/squid3
   links:
    - java:rdf.glytoucan.org
   restart: always
@@ -83,15 +84,15 @@ local_mariadb:
     - MYSQL_PASSWORD
     - MYSQL_DATABASE=glytoucan_localization
   restart: always
-#user_virtuoso:
-#  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-virtuoso
-#  ports:
-#    - 1110:1111
-#    - 8889:8890
-#  volumes:
-#    - /etc/localtime:/etc/localtime
-#    - /opt/virtuoso_user:/virtuoso
-#  restart: always
+user_virtuoso:
+  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-virtuoso
+  ports:
+    - 1110:1111
+    - 8889:8890
+  volumes:
+    - /etc/localtime:/etc/localtime
+    - /opt/virtuoso_user:/virtuoso
+  restart: always
 api:
   image: maven:3.3.3-jdk-8
   ports:
