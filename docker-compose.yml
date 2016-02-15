@@ -8,7 +8,7 @@ web:
    - /etc/localtime:/etc/localtime
   links:
    - glyspace:test.glytoucan.org
-   - squid:rdf.glytoucan.org
+   - squid:squid.glytoucan.org
    - stanza:stanza.glytoucan.org
   restart: always
 glyspace:
