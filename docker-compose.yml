@@ -19,7 +19,7 @@ glyspace:
    - /etc/localtime:/etc/localtime
   restart: always
 squid:
-  build: ../docker-glyspacesquid
+  build: ${WORKSPACE_PARENT}/workspace/docker-glyspacesquid
   ports:
    - "3180:80"
    - "3128:28"
