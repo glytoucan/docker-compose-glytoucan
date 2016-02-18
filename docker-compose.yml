@@ -8,7 +8,7 @@ web:
    - /etc/localtime:/etc/localtime
   links:
    - glyspace:test.glytoucan.org
-   - squid:squid.glytoucan.org
+   - squid:rdf.glytoucan.org
    - stanza:stanza.glytoucan.org
   restart: always
 glyspace:
@@ -26,6 +26,7 @@ squid:
   volumes:
    - /opt/glytoucan/squid/log:/var/log/squid3
    - /opt/glytoucan/squid/cache:/var/spool/squid3
+   - /etc/localtime:/etc/localtime
   links:
    - java:rdf.glytoucan.org
   restart: always
@@ -60,6 +61,7 @@ stanza:
   volumes: 
   # the dockerfile uses app/glytoucan-stanza so glytoucan-stanza should be in workspace
     - ${JENKINS_WORKSPACE_PARENT}/workspace:/app
+    - /etc/localtime:/etc/localtime
   links:
     - api:rdf.glytoucan.org
   restart: always
@@ -69,6 +71,7 @@ local:
     - 88:80
   volumes:
     - /mnt/jenkins/workspace/local.glytoucan:/var/www/html
+    - /etc/localtime:/etc/localtime
   links:
     - local_mariadb:local.glytoucan.org
   restart: always
@@ -78,6 +81,7 @@ local_mariadb:
     - 3306:3306
   volumes:
     - /mnt/localization/mariadb/lib:/var/lib/mysql
+    - /etc/localtime:/etc/localtime
 #  env_file: glytoucan.env
   environment:
     - MYSQL_USER=local
@@ -101,6 +105,7 @@ api:
   volumes:
     - /opt/api.glytoucan/maven:/root/.m2
     - ${WORKSPACE_PARENT}/workspace/${API_GLYTOUCAN}:/workspace
+    - /etc/localtime:/etc/localtime
   working_dir: /workspace
   command: mvn -U spring-boot:run
   environment:
