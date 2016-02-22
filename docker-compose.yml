@@ -11,6 +11,7 @@ web:
    - squid:rdf.glytoucan.org
    - stanza:stanza.glytoucan.org
    - api:api.glytoucan.org
+   - awstats:stats.glytoucan.org
   restart: always
 glyspace:
   build: ${WORKSPACE_PARENT}/workspace/docker-glyspace
@@ -123,3 +124,15 @@ api:
    - SPRING_TRIPLESTORE_PASSWORD
    - SPRING_TRIPLESTORE_URL
   restart: always
+awstats:
+  build: ${HOME}/${WORKSPACE}/docker-awstats/
+  ports:
+    - "100:80"
+  volumes:
+#   - /opt/bluetree/apacherun:/var/run/apache2
+    - /opt/glytoucan/awstats/data:/var/lib/awstats
+#    - /opt/glytoucan/apache/www:/var/www/html
+    - /opt/glytoucan/awstats/logs:/var/log
+#   - /var/log:/var/log
+#   - ${HOME}/${WORKSPACE}/docker-awstats/logs:/var/log/apache2
+    - /etc/localtime:/etc/localtime         
