@@ -125,7 +125,7 @@ api:
    - SPRING_TRIPLESTORE_URL
   restart: always
 awstats:
-  build: ${HOME}/${WORKSPACE}/docker-awstats/
+  build: ${WORKSPACE_PARENT}/workspace/docker-awstats
   ports:
     - "100:80"
   volumes:
