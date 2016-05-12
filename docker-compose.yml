@@ -62,7 +62,7 @@ stanza:
     - 9292:80
   volumes: 
   # the dockerfile uses app/glytoucan-stanza so glytoucan-stanza should be in workspace
-    - ${JENKINS_WORKSPACE_PARENT}/workspace:/app
+    - ${WORKSPACE_PARENT}/${WORKSPACE}:/app
     - /etc/localtime:/etc/localtime
   links:
     - api:rdf.glytoucan.org
@@ -92,7 +92,7 @@ local_mariadb:
     - MYSQL_DATABASE=glytoucan_localization
   restart: always
 #user_virtuoso:
-#  build: ${JENKINS_WORKSPACE_PARENT}/workspace/docker-virtuoso
+#  build: ${WORKSPACE_PARENT}/workspace/docker-virtuoso
 #  ports:
 #    - 1110:1111
 #    - 8889:8890
@@ -136,3 +136,7 @@ api:
 #   - /var/log:/var/log
 #   - ${HOME}/${WORKSPACE}/docker-awstats/logs:/var/log/apache2
 #    - /etc/localtime:/etc/localtime         
+soap.api:
+  extends:
+    file: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-compose-glytoucan/soap.api/docker-compose.yml
+    service: soap.api
