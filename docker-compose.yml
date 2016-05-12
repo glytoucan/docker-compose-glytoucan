@@ -138,5 +138,5 @@ api:
 #    - /etc/localtime:/etc/localtime         
 soap.api:
   extends:
-    file: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-compose-glytoucan/soap.api/docker-compose.yml
+    file: ${WORKSPACE_PARENT}/${WORKSPACE}/${DOCKER_COMPOSE_GLYTOUCAN}/soap.api/docker-compose.yml
     service: soap.api
