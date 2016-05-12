@@ -11,6 +11,7 @@ web:
    - squid:rdf.glytoucan.org
    - stanza:stanza.glytoucan.org
    - api:api.glytoucan.org
+   - soap.api:soap.api.glytoucan.org
      #   - awstats:stats.glytoucan.org
   restart: always
 glyspace:
