@@ -1,5 +1,6 @@
 web:
   build: ${WORKSPACE_PARENT}/workspace/docker-glytoucan
+#  image: glytoucan-web
   ports:
    - "90:80"
   volumes:
@@ -139,5 +140,5 @@ api:
 #    - /etc/localtime:/etc/localtime         
 soap.api:
   extends:
-    file: ${WORKSPACE_PARENT}/${WORKSPACE}/${DOCKER_COMPOSE_GLYTOUCAN}/soap.api/docker-compose.yml
+    file: soap.api/docker-compose.yml
     service: soap.api
