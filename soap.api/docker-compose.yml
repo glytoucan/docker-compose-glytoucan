@@ -4,7 +4,7 @@ soap.api:
     - 8881:80
   volumes:
     - /opt/maven/m2:/root/.m2
-    - ${WORKSPACE_PARENT}/${WORKSPACE_LOCAL}/${SOAP_API_GLYTOUCAN}:/workspace
+    - ${WORKSPACE_PARENT}/${WORKSPACE}/${SOAP_API_GLYTOUCAN}:/workspace
     - /etc/localtime:/etc/localtime
   working_dir: /workspace
   command: mvn -U spring-boot:run
