@@ -53,6 +53,8 @@ java:
    - SPRING_MAIL_PASSWORD
    - SPRING_TRIPLESTORE_PASSWORD
    - SPRING_TRIPLESTORE_URL
+   - API_CONTRIBUTOR_ID
+   - API_KEY
    - HOSTNAME=${RDF_GLYTOUCAN}
   links:
     - stanza:stanza.glytoucan.org
