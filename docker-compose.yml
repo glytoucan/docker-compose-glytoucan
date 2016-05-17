@@ -1,5 +1,5 @@
 web:
-  build: ${WORKSPACE_PARENT}/workspace/docker-glytoucan
+  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-glytoucan
 #  image: glytoucan-web
   ports:
    - "90:80"
@@ -11,19 +11,19 @@ web:
    - glyspace:test.glytoucan.org
    - squid:rdf.glytoucan.org
    - stanza:stanza.glytoucan.org
-   - api:api.glytoucan.org
-   - soap.api:soap.api.glytoucan.org
+   - api:test.api.glytoucan.org
+   - soap.api:test.soap.api.glytoucan.org
      #   - awstats:stats.glytoucan.org
   restart: always
 glyspace:
-  build: ${WORKSPACE_PARENT}/workspace/docker-glyspace
+  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-glyspace
   ports:
    - "8080:80"
   volumes:
    - /etc/localtime:/etc/localtime
   restart: always
 squid:
-  build: ${WORKSPACE_PARENT}/workspace/docker-glyspacesquid
+  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-glyspacesquid
   ports:
    - "3180:80"
    - "3128:28"
@@ -35,13 +35,13 @@ squid:
    - java:rdf.glytoucan.org
   restart: always
 java:
-  build: ${WORKSPACE_PARENT}/workspace/docker-rdf.glytoucan
+  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-rdf.glytoucan
   ports:
    - 81:80
   volumes:
    - /opt/rdf.glytoucan.org/tmp:/tmp
    - /opt/rdf.glytoucan.org/maven:/root/.m2
-   - ${WORKSPACE_PARENT}/workspace/${RDF_GLYTOUCAN}:/workspace
+   - ${WORKSPACE_PARENT}/${WORKSPACE}/${RDF_GLYTOUCAN}:/workspace
    - /opt/rdf.glytoucan.org/upload:/upload
    - /etc/localtime:/etc/localtime
   working_dir: /workspace
@@ -58,10 +58,11 @@ java:
    - HOSTNAME=${RDF_GLYTOUCAN}
   links:
     - stanza:stanza.glytoucan.org
+    - api:test.api.glytoucan.org
 #    - local:local.glytoucan.org
   restart: always
 stanza:
-  build: ${WORKSPACE_PARENT}/workspace/docker-glytoucan-stanza
+  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-glytoucan-stanza
   ports:
     - 9292:80
   volumes: 
@@ -72,11 +73,11 @@ stanza:
     - api:rdf.glytoucan.org
   restart: always
 local:
-  build: ${WORKSPACE_PARENT}/workspace/docker-local.glytoucan
+  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-local.glytoucan
   ports:
     - 88:80
   volumes:
-    - /mnt/jenkins/workspace/local.glytoucan:/var/www/html
+    - ${WORKSPACE_PARENT}/${WORKSPACE}/local.glytoucan:/var/www/html
     - /etc/localtime:/etc/localtime
   links:
     - local_mariadb:local.glytoucan.org
@@ -96,7 +97,7 @@ local_mariadb:
     - MYSQL_DATABASE=glytoucan_localization
   restart: always
 #user_virtuoso:
-#  build: ${WORKSPACE_PARENT}/workspace/docker-virtuoso
+#  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-virtuoso
 #  ports:
 #    - 1110:1111
 #    - 8889:8890
@@ -110,7 +111,7 @@ api:
     - 881:80
   volumes:
     - /opt/api.glytoucan/maven:/root/.m2
-    - ${WORKSPACE_PARENT}/workspace/${API_GLYTOUCAN}:/workspace
+    - ${WORKSPACE_PARENT}/${WORKSPACE}/${API_GLYTOUCAN}:/workspace
     - /etc/localtime:/etc/localtime
   working_dir: /workspace
   command: mvn -U spring-boot:run
@@ -129,7 +130,7 @@ api:
    - SPRING_TRIPLESTORE_URL
   restart: always
 #awstats:
-#  build: ${WORKSPACE_PARENT}/workspace/docker-awstats
+#  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-awstats
 #  ports:
 #    - "100:80"
 #  volumes:
@@ -144,3 +145,13 @@ soap.api:
   extends:
     file: soap.api/docker-compose.yml
     service: soap.api
+client:
+  image: maven:3.3.3-jdk-8
+  volumes:
+    - /opt/api.glytoucan/maven:/root/.m2
+    - ${WORKSPACE_PARENT}/${WORKSPACE}/client:/workspace
+    - /etc/localtime:/etc/localtime
+  working_dir: /workspace
+  command: mvn -U test
+  links:
+    - api:test.api.glytoucan.org
