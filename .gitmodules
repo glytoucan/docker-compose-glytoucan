@@ -16,9 +16,6 @@
 [submodule "docker-js-stanza"]
 	path = docker-js-stanza
 	url = https://github.com/glytoucan/docker-js-stanza.git
-[submodule "rdf.glytoucan"]
-	path = rdf.glytoucan
-	url = https://bitbucket.org/aokinobu/rdf.glytoucan.git
 [submodule "glytoucan-stanza"]
 	path = glytoucan-stanza
 	url = https://bitbucket.org/glycoSW/glytoucan-stanza.git
