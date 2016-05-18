@@ -37,3 +37,6 @@
 [submodule "pom-site"]
 	path = pom-site
 	url = https://github.com/glytoucan/pom-site.git
+[submodule "glytoucan_localization"]
+	path = glytoucan_localization
+	url = https://bitbucket.org/glytoucan_localization/glytoucan_localization.git
