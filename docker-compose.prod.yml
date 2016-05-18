@@ -8,4 +8,5 @@ stanzaredirect:
 stanza:
   links:
     - stanzaredirect:test.ts.glytoucan.org
+    - stanzaredirect:test.soap.api.glytoucan.org
     - api:rdf.glytoucan.org
