@@ -1,0 +1,5 @@
+data-java:
+  build: ${WORKSPACE_PARENT}/workspace/${RDF_GLYTOUCAN}
+  volumes:
+   - ${WORKSPACE_PARENT}/workspace/${RDF_GLYTOUCAN}:/workspace_copy
+  command: cp -R /workspace_copy /workspace

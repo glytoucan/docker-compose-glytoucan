@@ -1,4 +1,5 @@
 web:
+  # https://bitbucket.org/aokinobu/docker-glytoucan.git
   build: docker-glytoucan
 #  image: glytoucan-web
   ports:
@@ -24,7 +25,7 @@ glycanbuilder:
   restart: always
 squid:
   # https://github.com/glytoucan/docker-glyspacesquid.git
-  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-glyspacesquid
+  build: docker-glyspacesquid
   ports:
    - "3180:80"
    - "3128:28"
@@ -36,7 +37,8 @@ squid:
    - java:rdf.glytoucan.org
   restart: always
 java:
-  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-rdf.glytoucan
+  # https://github.com/glytoucan/docker-rdf.glytoucan.git
+  build: docker-rdf.glytoucan
   ports:
    - 81:80
   volumes:
@@ -60,21 +62,23 @@ java:
   links:
     - stanza:stanza.glytoucan.org
     - api:test.api.glytoucan.org
+    - virtuoso:test.ts.glytoucan.org
 #    - local:local.glytoucan.org
   restart: always
 stanza:
-  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-glytoucan-stanza
+  build: docker-stanza
   ports:
     - 9292:80
   volumes: 
-  # the dockerfile uses app/glytoucan-stanza so glytoucan-stanza should be in workspace
+  # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
     - ${WORKSPACE_PARENT}/${WORKSPACE}:/app
     - /etc/localtime:/etc/localtime
   links:
     - api:rdf.glytoucan.org
+    - virtuoso:test.ts.glytoucan.org
   restart: always
 local:
-  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-local.glytoucan
+  build: docker-local.glytoucan
   ports:
     - 88:80
   volumes:
@@ -156,3 +160,8 @@ client:
   command: mvn -U test
   links:
     - api:test.api.glytoucan.org
+# https://github.com/aokinobu/docker-virtuoso.git
+virtuoso:
+  extends:
+    file: docker-virtuoso/docker-compose.yml
+    service: virtuoso
