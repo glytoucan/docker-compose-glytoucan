@@ -44,7 +44,7 @@ java:
   volumes:
    - /opt/rdf.glytoucan.org/tmp:/tmp
    - /opt/rdf.glytoucan.org/maven:/root/.m2
-   - ${WORKSPACE_PARENT}/${WORKSPACE}/${RDF_GLYTOUCAN}:/workspace
+   - rdf.glytoucan:/workspace
    - /opt/rdf.glytoucan.org/upload:/upload
    - /etc/localtime:/etc/localtime
   working_dir: /workspace
@@ -71,7 +71,7 @@ stanza:
     - 9292:80
   volumes: 
   # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
-    - ${WORKSPACE_PARENT}/${WORKSPACE}:/app
+    - .:/app
     - /etc/localtime:/etc/localtime
   links:
     - api:rdf.glytoucan.org
@@ -82,7 +82,7 @@ local:
   ports:
     - 88:80
   volumes:
-    - ${WORKSPACE_PARENT}/${WORKSPACE}/local.glytoucan:/var/www/html
+    - glytoucan_localization:/var/www/html
     - /etc/localtime:/etc/localtime
   links:
     - local_mariadb:local.glytoucan.org
@@ -116,7 +116,7 @@ api:
     - 881:80
   volumes:
     - /opt/api.glytoucan/maven:/root/.m2
-    - ${WORKSPACE_PARENT}/${WORKSPACE}/${API_GLYTOUCAN}:/workspace
+    - api:/workspace
     - /etc/localtime:/etc/localtime
   working_dir: /workspace
   command: mvn -U spring-boot:run
@@ -154,7 +154,7 @@ client:
   image: maven:3.3.3-jdk-8
   volumes:
     - /opt/api.glytoucan/maven:/root/.m2
-    - ${WORKSPACE_PARENT}/${WORKSPACE}/client:/workspace
+    - client:/workspace
     - /etc/localtime:/etc/localtime
   working_dir: /workspace
   command: mvn -U test

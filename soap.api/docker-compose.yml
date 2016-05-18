@@ -4,7 +4,7 @@ soap.api:
     - 8888:80
   volumes:
     - /opt/maven/m2:/root/.m2
-    - ${WORKSPACE_PARENT}/${WORKSPACE}/${SOAP_API_GLYTOUCAN}:/workspace/soap.api
+    - api.soap:/workspace/soap.api
     - ${WORKSPACE_PARENT}/${WORKSPACE}/pom-site:/workspace/pom-site
     - /etc/localtime:/etc/localtime
   working_dir: /workspace/soap.api
