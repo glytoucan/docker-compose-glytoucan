@@ -25,9 +25,6 @@
 [submodule "glytoucan-stanza"]
 	path = glytoucan-stanza
 	url = https://bitbucket.org/glycoSW/glytoucan-stanza.git
-[submodule "glytoucan_localization"]
-	path = glytoucan_localization
-	url = https://bitbucket.org/glytoucan_localization/glytoucan_localization.git
 [submodule "api"]
 	path = api
 	url = https://github.com/glytoucan/api.git
