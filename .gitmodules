@@ -31,6 +31,6 @@
 [submodule "pom-site"]
 	path = pom-site
 	url = https://github.com/glytoucan/pom-site.git
-[submodule "java"]
-	path = java
-	url = https://github.com/glytoucan/java.git
+[submodule "rdf.glytoucan"]
+	path = rdf.glytoucan
+	url = https://github.com/glytoucan/rdf.glytoucan.git
