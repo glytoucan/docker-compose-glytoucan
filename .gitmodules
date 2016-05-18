@@ -4,3 +4,12 @@
 [submodule "docker-glyspacesquid"]
 	path = docker-glyspacesquid
 	url = https://github.com/glytoucan/docker-glyspacesquid.git
+[submodule "docker-rdf.glytoucan"]
+	path = docker-rdf.glytoucan
+	url = https://github.com/glytoucan/docker-rdf.glytoucan.git
+[submodule "docker-stanza"]
+	path = docker-stanza
+	url = https://github.com/glytoucan/docker-stanza.git
+[submodule "docker-virtuoso"]
+	path = docker-virtuoso
+	url = https://github.com/aokinobu/docker-virtuoso.git
