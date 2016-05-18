@@ -44,7 +44,7 @@ java:
   volumes:
    - /opt/rdf.glytoucan.org/tmp:/tmp
    - /opt/rdf.glytoucan.org/maven:/root/.m2
-   - ./rdf.glytoucan:/workspace
+   - ./java:/workspace
    - /opt/rdf.glytoucan.org/upload:/upload
    - /etc/localtime:/etc/localtime
   working_dir: /workspace
