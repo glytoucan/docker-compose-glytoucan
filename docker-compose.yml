@@ -62,7 +62,7 @@ java:
   links:
     - stanza:stanza.glytoucan.org
     - api:test.api.glytoucan.org
-    - virtuoso:test.ts.glytoucan.org
+#    - virtuoso:test.ts.glytoucan.org
 #    - local:local.glytoucan.org
   restart: always
 stanza:
@@ -75,7 +75,7 @@ stanza:
     - /etc/localtime:/etc/localtime
   links:
     - api:rdf.glytoucan.org
-    - virtuoso:test.ts.glytoucan.org
+#    - virtuoso:test.ts.glytoucan.org
   restart: always
 #user_virtuoso:
 #  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-virtuoso
@@ -137,7 +137,7 @@ client:
   links:
     - api:test.api.glytoucan.org
 # https://github.com/aokinobu/docker-virtuoso.git
-virtuoso:
-  extends:
-    file: docker-virtuoso/docker-compose.yml
-    service: virtuoso
+#virtuoso:
+#  extends:
+#    file: docker-virtuoso/docker-compose.yml
+#    service: virtuoso
