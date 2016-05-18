@@ -77,30 +77,6 @@ stanza:
     - api:rdf.glytoucan.org
     - virtuoso:test.ts.glytoucan.org
   restart: always
-local:
-  build: docker-local.glytoucan
-  ports:
-    - 88:80
-  volumes:
-    - ./glytoucan_localization:/var/www/html
-    - /etc/localtime:/etc/localtime
-  links:
-    - local_mariadb:local.glytoucan.org
-  restart: always
-local_mariadb:
-  image: mariadb
-  ports:
-    - 3306:3306
-  volumes:
-    - /mnt/localization/mariadb/lib:/var/lib/mysql
-    - /etc/localtime:/etc/localtime
-#  env_file: glytoucan.env
-  environment:
-    - MYSQL_USER=local
-    - MYSQL_ROOT_PASSWORD
-    - MYSQL_PASSWORD
-    - MYSQL_DATABASE=glytoucan_localization
-  restart: always
 #user_virtuoso:
 #  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-virtuoso
 #  ports:
