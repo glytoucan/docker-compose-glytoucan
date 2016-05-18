@@ -37,3 +37,6 @@
 [submodule "client"]
 	path = client
 	url = https://github.com/glytoucan/client.git
+[submodule "pom-site"]
+	path = pom-site
+	url = https://github.com/glytoucan/pom-site.git

@@ -44,7 +44,7 @@ java:
   volumes:
    - /opt/rdf.glytoucan.org/tmp:/tmp
    - /opt/rdf.glytoucan.org/maven:/root/.m2
-   - rdf.glytoucan:/workspace
+   - ./rdf.glytoucan:/workspace
    - /opt/rdf.glytoucan.org/upload:/upload
    - /etc/localtime:/etc/localtime
   working_dir: /workspace
@@ -82,7 +82,7 @@ local:
   ports:
     - 88:80
   volumes:
-    - glytoucan_localization:/var/www/html
+    - ./glytoucan_localization:/var/www/html
     - /etc/localtime:/etc/localtime
   links:
     - local_mariadb:local.glytoucan.org
@@ -116,7 +116,7 @@ api:
     - 881:80
   volumes:
     - /opt/api.glytoucan/maven:/root/.m2
-    - api:/workspace
+    - ./api:/workspace
     - /etc/localtime:/etc/localtime
   working_dir: /workspace
   command: mvn -U spring-boot:run
@@ -154,7 +154,7 @@ client:
   image: maven:3.3.3-jdk-8
   volumes:
     - /opt/api.glytoucan/maven:/root/.m2
-    - client:/workspace
+    - ./client:/workspace
     - /etc/localtime:/etc/localtime
   working_dir: /workspace
   command: mvn -U test
