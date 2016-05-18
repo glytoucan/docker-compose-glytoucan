@@ -13,3 +13,9 @@
 [submodule "docker-virtuoso"]
 	path = docker-virtuoso
 	url = https://github.com/aokinobu/docker-virtuoso.git
+[submodule "glytoucan-js-stanza"]
+	path = glytoucan-js-stanza
+	url = https://github.com/glytoucan/glytoucan-js-stanza.git
+[submodule "docker-js-stanza"]
+	path = docker-js-stanza
+	url = https://github.com/glytoucan/docker-js-stanza.git
