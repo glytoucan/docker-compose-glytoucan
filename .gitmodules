@@ -1,6 +1,3 @@
-[submodule "docker-glytoucan"]
-	path = docker-glytoucan
-	url = https://bitbucket.org/aokinobu/docker-glytoucan.git
 [submodule "docker-glyspacesquid"]
 	path = docker-glyspacesquid
 	url = https://github.com/glytoucan/docker-glyspacesquid.git
