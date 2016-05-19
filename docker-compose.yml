@@ -59,23 +59,11 @@ java:
    - API_CONTRIBUTOR_ID
    - API_KEY
    - HOSTNAME=${RDF_GLYTOUCAN}
-  links:
-    - stanza:stanza.glytoucan.org
-    - api:test.api.glytoucan.org
+#  links:
+#    - stanza:stanza.glytoucan.org
+#    - api:test.api.glytoucan.org
 #    - virtuoso:test.ts.glytoucan.org
 #    - local:local.glytoucan.org
-  restart: always
-stanza:
-  build: docker-stanza
-  ports:
-    - 9292:80
-  volumes: 
-  # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
-    - .:/app
-    - /etc/localtime:/etc/localtime
-  links:
-    - api:rdf.glytoucan.org
-#    - virtuoso:test.ts.glytoucan.org
   restart: always
 #user_virtuoso:
 #  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-virtuoso
@@ -86,30 +74,6 @@ stanza:
 #    - /etc/localtime:/etc/localtime
 #    - /opt/virtuoso_user:/virtuoso
 #  restart: always
-api:
-  image: maven:3.3.3-jdk-8
-  ports:
-    - 881:80
-  volumes:
-    - /opt/api.glytoucan/maven:/root/.m2
-    - ./api:/workspace
-    - /etc/localtime:/etc/localtime
-  working_dir: /workspace
-  command: mvn -U spring-boot:run
-  environment:
-   - SERVER_PORT
-   - MAIL_ADDRESS_FROM
-   - MAIL_ADDRESS_ADMIN
-   - MAIL_BODY_NEWREGISTRATION
-   - MAIL_BODY_NOTIFYREGISTRATION
-   - MAIL_SUBJECT_NEWREGISTRATION
-   - MAIL_SUBJECT_NOTIFYREGISTRATION
-   - MSDB_RDF
-   - SPRING_MAIL_USERNAME
-   - SPRING_MAIL_PASSWORD
-   - SPRING_TRIPLESTORE_PASSWORD
-   - SPRING_TRIPLESTORE_URL
-  restart: always
 #awstats:
 #  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-awstats
 #  ports:
