@@ -1,9 +1,9 @@
-java_stanza:
-  extends:
-    file: docker-compose.yml
-    service: java
-  links:
-    - stanza:stanza.glytoucan.org
+#java_stanza:
+#  extends:
+#    file: docker-compose.yml
+#    service: java
+#  links:
+#    - stanza:stanza.glytoucan.org
 stanza:
   build: docker-stanza
   ports:
