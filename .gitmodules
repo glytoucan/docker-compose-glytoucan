@@ -34,3 +34,4 @@
 [submodule "rdf.glytoucan"]
 	path = rdf.glytoucan
 	url = https://github.com/glytoucan/rdf.glytoucan.git
+	branch = master
