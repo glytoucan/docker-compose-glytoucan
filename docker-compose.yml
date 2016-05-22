@@ -29,6 +29,7 @@ java:
   links:
     - stanza:stanza.glytoucan.org
     - api:test.api.glytoucan.org
+    - soap.api:test.soap.api.glytoucan.org
 #    - local:local.glytoucan.org
   restart: always
 #awstats:
