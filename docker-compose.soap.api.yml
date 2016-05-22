@@ -1,0 +1,5 @@
+# convenience compose file
+soap.api:
+  extends:
+    file: soap.api/docker-compose.yml
+    service: soap.api

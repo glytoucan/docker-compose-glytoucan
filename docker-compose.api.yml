@@ -1,0 +1,24 @@
+api:
+  image: maven:3.3.3-jdk-8
+  ports:
+    - 881:80
+  volumes:
+    - /opt/glytoucan/maven:/root/.m2
+    - ./api:/workspace
+    - /etc/localtime:/etc/localtime
+  working_dir: /workspace
+  command: mvn -U spring-boot:run
+  environment:
+   - SERVER_PORT
+   - MAIL_ADDRESS_FROM
+   - MAIL_ADDRESS_ADMIN
+   - MAIL_BODY_NEWREGISTRATION
+   - MAIL_BODY_NOTIFYREGISTRATION
+   - MAIL_SUBJECT_NEWREGISTRATION
+   - MAIL_SUBJECT_NOTIFYREGISTRATION
+   - MSDB_RDF
+   - SPRING_MAIL_USERNAME
+   - SPRING_MAIL_PASSWORD
+   - SPRING_TRIPLESTORE_PASSWORD
+   - SPRING_TRIPLESTORE_URL
+  restart: always

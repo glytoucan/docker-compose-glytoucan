@@ -1,0 +1,11 @@
+squid:
+# https://github.com/glytoucan/docker-glyspacesquid.git
+  build: docker-glyspacesquid
+  ports:
+   - "3180:80"
+   - "3128:28"
+  volumes:
+   - /opt/glytoucan/squid/log:/var/log/squid3
+   - /opt/glytoucan/squid/cache:/var/spool/squid3
+   - /etc/localtime:/etc/localtime
+  restart: always

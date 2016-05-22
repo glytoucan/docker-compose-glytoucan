@@ -1,0 +1,28 @@
+java:
+# https://github.com/glytoucan/docker-rdf.glytoucan.git
+  build: docker-rdf.glytoucan
+  ports:
+   - 81:80
+  volumes:
+   - /opt/glytoucan/java/tmp:/tmp
+   - /opt/glytoucan/maven:/root/.m2
+   - ./rdf.glytoucan:/workspace
+   - /opt/glytoucan/java/upload:/upload
+   - /etc/localtime:/etc/localtime
+  working_dir: /workspace
+#env_file: glytoucan.env
+  environment:
+   - GOOGLE_OAUTH2_CLIENTID
+   - GOOGLE_OAUTH2_CLIENTSECRET
+   - SPRING_MAIL_USERNAME
+   - SPRING_MAIL_PASSWORD
+   - SPRING_TRIPLESTORE_PASSWORD
+   - SPRING_TRIPLESTORE_URL
+   - API_CONTRIBUTOR_ID
+   - API_KEY
+   - HOSTNAME=${RDF_GLYTOUCAN}
+#  links:
+#    - stanza:stanza.glytoucan.org
+#    - api:test.api.glytoucan.org
+#    - local:local.glytoucan.org
+  restart: always

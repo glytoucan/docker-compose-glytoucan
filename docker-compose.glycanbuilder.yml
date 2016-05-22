@@ -1,0 +1,7 @@
+glycanbuilder:
+  build: docker-glycanbuilder
+  ports:
+   - "8080:80"
+  volumes:
+   - /etc/localtime:/etc/localtime
+  restart: always

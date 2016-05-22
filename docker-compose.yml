@@ -10,74 +10,30 @@ web:
    - /etc/localtime:/etc/localtime
   links:
    - squid:rdf.glytoucan.org
-   - stanza:stanza.glytoucan.org
+#   - stanza:stanza.glytoucan.org
    - api:test.api.glytoucan.org
    - soap.api:soap.api.glytoucan.org
    - glycanbuilder:glycanbuilder.glytoucan.org
      #   - awstats:stats.glytoucan.org
   restart: always
-glycanbuilder:
-  build: docker-glycanbuilder
-  ports:
-   - "8080:80"
-  volumes:
-   - /etc/localtime:/etc/localtime
-  restart: always
 squid:
-  # https://github.com/glytoucan/docker-glyspacesquid.git
-  build: docker-glyspacesquid
-  ports:
-   - "3180:80"
-   - "3128:28"
-  volumes:
-   - /opt/glytoucan/squid/log:/var/log/squid3
-   - /opt/glytoucan/squid/cache:/var/spool/squid3
-   - /etc/localtime:/etc/localtime
+  extends:
+    file: docker-compose.squid.yml
+    service: squid
   links:
-   - java:rdf.glytoucan.org
-  restart: always
+    - java:rdf.glytoucan.org
 java:
-  # https://github.com/glytoucan/docker-rdf.glytoucan.git
-  build: docker-rdf.glytoucan
-  ports:
-   - 81:80
-  volumes:
-   - /opt/rdf.glytoucan.org/tmp:/tmp
-   - /opt/rdf.glytoucan.org/maven:/root/.m2
-   - ./rdf.glytoucan:/workspace
-   - /opt/rdf.glytoucan.org/upload:/upload
-   - /etc/localtime:/etc/localtime
-  working_dir: /workspace
-  #env_file: glytoucan.env
-  environment:
-   - GOOGLE_OAUTH2_CLIENTID
-   - GOOGLE_OAUTH2_CLIENTSECRET
-   - SPRING_MAIL_USERNAME
-   - SPRING_MAIL_PASSWORD
-   - SPRING_TRIPLESTORE_PASSWORD
-   - SPRING_TRIPLESTORE_URL
-   - API_CONTRIBUTOR_ID
-   - API_KEY
-   - HOSTNAME=${RDF_GLYTOUCAN}
-#  links:
-#    - stanza:stanza.glytoucan.org
-#    - api:test.api.glytoucan.org
-#    - virtuoso:test.ts.glytoucan.org
+  extends:
+    file: docker-compose.java.yml
+    service: java
+  links:
+    - stanza:stanza.glytoucan.org
+    - api:test.api.glytoucan.org
 #    - local:local.glytoucan.org
   restart: always
-#user_virtuoso:
-#  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-virtuoso
-#  ports:
-#    - 1110:1111
-#    - 8889:8890
-#  volumes:
-#    - /etc/localtime:/etc/localtime
-#    - /opt/virtuoso_user:/virtuoso
-#  restart: always
 #awstats:
 #  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-awstats
 #  ports:
-#    - "100:80"
 #  volumes:
 #   - /opt/bluetree/apacherun:/var/run/apache2
 #    - /opt/glytoucan/awstats/data:/var/lib/awstats
@@ -86,22 +42,21 @@ java:
 #   - /var/log:/var/log
 #   - ${HOME}/${WORKSPACE}/docker-awstats/logs:/var/log/apache2
 #    - /etc/localtime:/etc/localtime         
+api:
+  extends:
+    file: docker-compose.api.yml
+    service: api
 soap.api:
   extends:
-    file: soap.api/docker-compose.yml
+    file: docker-compose.soap.api.yml
     service: soap.api
-client:
-  image: maven:3.3.3-jdk-8
-  volumes:
-    - /opt/api.glytoucan/maven:/root/.m2
-    - ./client:/workspace
-    - /etc/localtime:/etc/localtime
-  working_dir: /workspace
-  command: mvn -U test
+glycanbuilder:
+  extends:
+    file: docker-compose.glycanbuilder.yml
+    service: glycanbuilder
+stanza:
+  extends:
+    file: docker-compose.stanza.yml
+    service: stanza
   links:
-    - api:test.api.glytoucan.org
-# https://github.com/aokinobu/docker-virtuoso.git
-#virtuoso:
-#  extends:
-#    file: docker-virtuoso/docker-compose.yml
-#    service: virtuoso
+    - api:rdf.glytoucan.org
