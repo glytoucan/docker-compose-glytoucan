@@ -1,0 +1,21 @@
+# This is a simple setup for java, api, and stanza.  Substructure search should be possible, however GlycanBuilder (graphics search) will not.
+# For graphics search, please use the default docker-compose.yml
+
+java:
+  links:
+    - stanza:stanza.glytoucan.org
+    - api:test.api.glytoucan.org
+stanza:
+  extends:
+    file: docker-compose.stanza.yml
+    service: stanza
+  links:
+    - api:rdf.glytoucan.org
+api:
+  extends:
+    file: docker-compose.api.yml
+    service: api
+glycanbuilder:
+  extends:
+    file: docker-compose.glycanbuilder.yml
+    service: glycanbuilder
