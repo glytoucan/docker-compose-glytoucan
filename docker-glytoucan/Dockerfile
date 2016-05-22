@@ -11,10 +11,12 @@ RUN chmod a+x /run.sh
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD 010-test.api.conf /etc/apache2/sites-available/010-test.api.conf
 ADD 020-test.soap.api.conf /etc/apache2/sites-available/020-test.soap.api.conf
+ADD 050-local.glytoucan.conf /etc/apache2/sites-available/050-local.glytoucan.conf 
 
 RUN a2ensite 000-default.conf
 RUN a2ensite 010-test.api.conf
 RUN a2ensite 020-test.soap.api.conf
+RUN a2ensite 050-local.glytoucan.conf 
 RUN a2enmod rewrite
 RUN a2enmod proxy
 RUN a2enmod proxy_http
