@@ -1,36 +1,47 @@
 [submodule "docker-glyspacesquid"]
 	path = docker-glyspacesquid
 	url = https://github.com/glytoucan/docker-glyspacesquid.git
+	branch = master
 [submodule "docker-rdf.glytoucan"]
 	path = docker-rdf.glytoucan
 	url = https://github.com/glytoucan/docker-rdf.glytoucan.git
+	branch = master
 [submodule "docker-stanza"]
 	path = docker-stanza
 	url = https://github.com/glytoucan/docker-stanza.git
+	branch = master
 [submodule "docker-virtuoso"]
 	path = docker-virtuoso
 	url = https://github.com/aokinobu/docker-virtuoso.git
+	branch = master
 [submodule "glytoucan-js-stanza"]
 	path = glytoucan-js-stanza
 	url = https://github.com/glytoucan/glytoucan-js-stanza.git
+	branch = master
 [submodule "docker-js-stanza"]
 	path = docker-js-stanza
 	url = https://github.com/glytoucan/docker-js-stanza.git
+	branch = master
 [submodule "glytoucan-stanza"]
 	path = glytoucan-stanza
 	url = https://bitbucket.org/glycoSW/glytoucan-stanza.git
+	branch = master
 [submodule "api"]
 	path = api
 	url = https://github.com/glytoucan/api.git
+	branch = master
 [submodule "soap.api/api.soap"]
 	path = soap.api/api.soap
 	url = https://github.com/glytoucan/api.soap.git
+	branch = master
 [submodule "client"]
 	path = client
 	url = https://github.com/glytoucan/client.git
+	branch = master
 [submodule "pom-site"]
 	path = pom-site
 	url = https://github.com/glytoucan/pom-site.git
+	branch = master
 [submodule "rdf.glytoucan"]
 	path = rdf.glytoucan
 	url = https://github.com/glytoucan/rdf.glytoucan.git
