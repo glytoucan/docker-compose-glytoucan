@@ -11,16 +11,21 @@ java:
    - /etc/localtime:/etc/localtime
   working_dir: /workspace
 #env_file: glytoucan.env
+  env_file:
+   - ./google.env
+   - ./mail.env
+   - ./triplestore.env
+   - ./api.env
   environment:
-   - GOOGLE_OAUTH2_CLIENTID
-   - GOOGLE_OAUTH2_CLIENTSECRET
+#   - GOOGLE_OAUTH2_CLIENTID
+#   - GOOGLE_OAUTH2_CLIENTSECRET
    - SPRING_MAIL_USERNAME
    - SPRING_MAIL_PASSWORD
    - SPRING_TRIPLESTORE_PASSWORD
    - SPRING_TRIPLESTORE_URL
    - API_CONTRIBUTOR_ID
    - API_KEY
-   - HOSTNAME=${RDF_GLYTOUCAN}
+   - HOSTNAME=rdf.glytoucan
 #  links:
 #    - stanza:stanza.glytoucan.org
 #    - api:test.api.glytoucan.org
