@@ -46,3 +46,7 @@
 	path = rdf.glytoucan
 	url = https://github.com/glytoucan/rdf.glytoucan.git
 	branch = master
+[submodule "docker-apache-stanza.redirect"]
+	path = docker-apache-stanza.redirect
+	url = https://github.com/glytoucan/docker-apache-stanza.redirect.git
+	branch = master

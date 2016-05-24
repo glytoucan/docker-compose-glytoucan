@@ -15,7 +15,3 @@ api:
   extends:
     file: docker-compose.api.yml
     service: api
-glycanbuilder:
-  extends:
-    file: docker-compose.glycanbuilder.yml
-    service: glycanbuilder
