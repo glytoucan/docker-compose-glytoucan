@@ -1,0 +1,11 @@
+web:
+  # https://bitbucket.org/aokinobu/docker-glytoucan.git
+  build: docker-glytoucan
+#  image: glytoucan-web
+  ports:
+   - "90:80"
+  volumes:
+   - /opt/glytoucan/apacherun:/var/run/apache2
+   - /opt/glytoucan/apachelogs:/var/log/apache2
+   - /etc/localtime:/etc/localtime
+  restart: always
