@@ -15,3 +15,7 @@ api:
   extends:
     file: docker-compose.api.yml
     service: api
+js-stanza:
+  extends:
+    file: docker-compose.js-stanza.yml
+    service: js-stanza
