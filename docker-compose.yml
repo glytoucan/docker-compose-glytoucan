@@ -8,6 +8,7 @@ web:
    - api:test.api.glytoucan.org
    - soap.api:soap.api.glytoucan.org
    - glycanbuilder:glycanbuilder.glytoucan.org
+   - js-stanza:js-stanza.glytoucan.org
      #   - awstats:stats.glytoucan.org
 squid:
   extends:
@@ -54,6 +55,10 @@ stanza:
     service: stanza
   links:
     - api:rdf.glytoucan.org
+js-stanza:
+  extends:
+    file: docker-compose.js-stanza.yml
+    service: js-stanza
 #  volumes_from:
 #    - bundle
 #bundle:

@@ -5,6 +5,11 @@ java:
   links:
     - stanza:stanza.glytoucan.org
     - api:test.api.glytoucan.org
+  env_file:
+    - ./google.env
+    - ./mail.env
+    - ./triplestore.env
+    - ./api.env
 stanza:
   extends:
     file: docker-compose.stanza.yml

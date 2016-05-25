@@ -1,12 +1,11 @@
 stanzaredirect:
-  build: ${WORKSPACE_PARENT}/workspace/docker-apache-stanza.redirect
+  build: docker-apache-stanza.redirect
   ports:
     - 9293:80
   volumes:
-    - /opt/apache-stanza.redirect/apachelogs:/var/log/apache2
+    - /opt/glytoucan/apache-stanza.redirect/apachelogs:/var/log/apache2
   restart: always
 stanza:
   links:
     - stanzaredirect:test.ts.glytoucan.org
-    - stanzaredirect:test.soap.api.glytoucan.org
     - api:rdf.glytoucan.org
