@@ -6,10 +6,11 @@
 #    - stanza:stanza.glytoucan.org
 stanza:
   build: docker-stanza
+  command: bundle exec rackup -p 80
   ports:
     - 9292:80
   volumes: 
   # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
-    - .:/app
+    - glytoucan-stanza:/app/glytoucan-stanza
     - /etc/localtime:/etc/localtime
   restart: always
