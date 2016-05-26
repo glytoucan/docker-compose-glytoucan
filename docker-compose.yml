@@ -3,7 +3,7 @@ web:
     file: docker-compose.web.yml
     service: web
   links:
-   - squid:rdf.glytoucan.org
+   - squid:squid.glytoucan.org
 #   - stanza:stanza.glytoucan.org
    - api:test.api.glytoucan.org
    - soap.api:soap.api.glytoucan.org
