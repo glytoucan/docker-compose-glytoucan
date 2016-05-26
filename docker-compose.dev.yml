@@ -33,10 +33,12 @@ api:
     file: docker-compose.api.yml
     service: api
   env_file:
-    - ./google.env
     - ./mail.env
     - ./triplestore.env
     - ./api.env
+  environment:
+    - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
+    - SPRING_TRIPLESTORE_PASSWORD=dba
 js-stanza:
   extends:
     file: docker-compose.js-stanza.yml
