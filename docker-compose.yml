@@ -15,7 +15,7 @@ squid:
     file: docker-compose.squid.yml
     service: squid
   links:
-    - java:rdf.glytoucan.org
+    - java:squid.glytoucan.org
 java:
   extends:
     file: docker-compose.java.yml
