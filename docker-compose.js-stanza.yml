@@ -1,11 +1,14 @@
-
-js-stanza:
-  build: docker-js-stanza
-  ports:
-    - 8081:8080
-  volumes: 
-  # the dockerfile uses /app/glytoucan-js-stanza so glytoucan-js-stanza should be in workspace
-    # - .:/app
-    - ./glytoucan-js-stanza/glytoucan_stanza/entry_provider:/stanza/glytoucan_stanza/entry_provider
-    - /etc/localtime:/etc/localtime
-  restart: always
+version: '2'
+services:
+  js-stanza:
+    build: docker-js-stanza
+    image: glytoucan_js-stanza:v${GTC_VERSION}
+    ports:
+      - 8081:8080
+    volumes: 
+    # the dockerfile uses /app/glytoucan-js-stanza so glytoucan-js-stanza should be in workspace
+      # - .:/app
+      - ./glytoucan-js-stanza/glytoucan_stanza/entry_provider:/stanza/glytoucan_stanza/entry_provider
+      - /etc/localtime:/etc/localtime
+    working_dir: /stanza/glytoucan_stanza/entry_provider
+    restart: always

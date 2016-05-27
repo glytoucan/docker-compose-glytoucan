@@ -1,11 +1,36 @@
-stanzaredirect:
-  build: docker-apache-stanza.redirect
-  ports:
-    - 9293:80
-  volumes:
-    - /opt/glytoucan/apache-stanza.redirect/apachelogs:/var/log/apache2
-  restart: always
-stanza:
-  links:
-    - stanzaredirect:test.ts.glytoucan.org
-    - api:rdf.glytoucan.org
+version: '2'
+services:
+  stanzaredirect:
+    build: docker-apache-stanza.redirect
+    ports:
+      - 9293:80
+    volumes:
+      - /opt/glytoucan/apache-stanza.redirect/apachelogs:/var/log/apache2
+    restart: always
+  stanza:
+    links:
+      - stanzaredirect:test.ts.glytoucan.org
+      - api:rdf.glytoucan.org
+    working_dir: /source/glytoucan-stanza
+    volumes:
+      - source:/source
+  js-stanza:
+    working_dir: /source/glytoucan-js-stanza/glytoucan_stanza/entry_provider
+    volumes:
+      - source:/source
+  java:
+     working_dir: /source/rdf.glytoucan
+     volumes:
+      - source:/source
+  api:
+     working_dir: /source/api
+     volumes:
+      - source:/source
+  soap.api:
+     working_dir: /source/soap.api
+     volumes:
+      - source:/source
+volumes:
+  source:
+    external:
+      name: source.${GTC_VERSION}    
