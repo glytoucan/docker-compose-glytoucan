@@ -3,7 +3,7 @@ services:
   web:
     # https://bitbucket.org/aokinobu/docker-glytoucan.git
     build: docker-glytoucan
-    image: glytoucan-web:v${GTC_VERSION}
+#    image: glytoucan_web:v${GTC_VERSION}
     ports:
      - "90:80"
     volumes:

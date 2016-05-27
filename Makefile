@@ -17,12 +17,15 @@ ls:
 bash:
 	docker run --rm -it -v source.${GTC_VERSION}:/workspace --workdir /workspace/rdf.glytoucan dockercomposeglytoucan_java /bin/bash
 
-exec:
-	sudo docker exec -it $(DOCKERUSER)_jenkinsmaster_1 /bin/bash
+tag:
+	docker tag glytoucan_web:v${GTC_VERSION} glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
 #docker run -v /etc/localtime:/etc/localtime:ro -i -t mattdm/fedora /bin/bash
 
-env:
-	sudo docker run -v /opt/jenkins/mysql/lib:/var/lib/mysql -v /opt/jenkins/mysql/etc:/etc/mysql --name="docker-jenkins_bluetree-env" aoki/docker-jenkins env
+push:
+	docker push glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
+	docker push glycoinfo.org:5000/glytoucan_stanza:v${GTC_VERSION}
+	docker push glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
+	docker push glycoinfo.org:5000/glytoucan_java:v${GTC_VERSION}
 
 init:
 	sudo docker run -d -v /opt/jenkins/mysql/lib:/var/lib/mysql:rw -v /opt/jenkins/mysql/etc:/etc/mysql:rw aoki/docker-jenkins /bin/bash -c "/usr/bin/mysql_install_db"

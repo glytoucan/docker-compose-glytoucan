@@ -2,7 +2,7 @@ version: '2'
 services:
   js-stanza:
     build: docker-js-stanza
-    image: glytoucan_js-stanza:v${GTC_VERSION}
+#    image: glytoucan_js-stanza:v${GTC_VERSION}
     ports:
       - 8081:8080
     volumes: 

@@ -1,13 +1,17 @@
 version: '2'
 services:
+  web:
+    image: glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
   stanzaredirect:
     build: docker-apache-stanza.redirect
+    image: glycoinfo.org:5000/glytoucan_redirect:v${GTC_VERSION}
     ports:
       - 9293:80
     volumes:
       - /opt/glytoucan/apache-stanza.redirect/apachelogs:/var/log/apache2
     restart: always
   stanza:
+    image: glycoinfo.org:5000/glytoucan_stanza:v${GTC_VERSION}
     links:
       - stanzaredirect:test.ts.glytoucan.org
       - api:rdf.glytoucan.org
@@ -15,20 +19,22 @@ services:
     volumes:
       - source:/source
   js-stanza:
+    image: glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
     working_dir: /source/glytoucan-js-stanza/glytoucan_stanza/entry_provider
     volumes:
       - source:/source
   java:
-     working_dir: /source/rdf.glytoucan
-     volumes:
+    image: glycoinfo.org:5000/glytoucan_java:v${GTC_VERSION}
+    working_dir: /source/rdf.glytoucan
+    volumes:
       - source:/source
   api:
-     working_dir: /source/api
-     volumes:
+    working_dir: /source/api
+    volumes:
       - source:/source
   soap.api:
-     working_dir: /source/soap.api
-     volumes:
+    working_dir: /source/soap.api
+    volumes:
       - source:/source
 volumes:
   source:

@@ -2,7 +2,7 @@ version: '2'
 services:
   source:
     build: docker-source
-    image: glytoucan-source:v${GTC_VERSION}
+#    image: glytoucan-source:v${GTC_VERSION}
     volumes:
      - source:/workspace
 volumes:

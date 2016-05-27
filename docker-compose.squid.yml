@@ -3,7 +3,7 @@ services:
   squid:
 # https://github.com/glytoucan/docker-glyspacesquid.git
     build: docker-glyspacesquid
-    image: glytoucan_squid:v${GTC_VERSION}
+#    image: glytoucan_squid:v${GTC_VERSION}
     ports:
      - "3180:80"
      - "3128:28"
