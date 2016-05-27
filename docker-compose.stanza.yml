@@ -9,8 +9,8 @@ stanza:
   ports:
     - 9292:80
   volumes: 
-  working_dir: /app/glytoucan_stanza
   # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
     - .:/app
     - /etc/localtime:/etc/localtime
+  working_dir: /app/glytoucan_stanza
   restart: always
