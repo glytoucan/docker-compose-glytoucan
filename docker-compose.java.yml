@@ -4,10 +4,10 @@ java:
   ports:
    - 81:80
   volumes:
-   - $HOME/glytoucan/java/tmp:/tmp
-   - $HOME/glytoucan/maven:/root/.m2
+   - /opt/glytoucan/java/tmp:/tmp
+   - /opt/glytoucan/maven:/root/.m2
    - ./rdf.glytoucan:/workspace
-   - $HOME/glytoucan/java/upload:/upload
+   - /opt/glytoucan/java/upload:/upload
    - /etc/localtime:/etc/localtime
   working_dir: /workspace
 #env_file: glytoucan.env
