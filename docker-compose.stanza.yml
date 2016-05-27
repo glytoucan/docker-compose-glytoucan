@@ -2,7 +2,7 @@ version: '2'
 services:
   stanza:
     build: docker-stanza
-    image: glytoucan_stanza:${GTC_VERSION}
+    image: glytoucan_stanza:v${GTC_VERSION}
     ports:
       - 9292:80
     volumes: 
