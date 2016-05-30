@@ -7,9 +7,9 @@ services:
     ports:
      - 81:80
     volumes:
-     - /opt/glytoucan/java/tmp:/tmp
-     - /opt/glytoucan/maven:/root/.m2
-     - /opt/glytoucan/java/upload:/upload
+     - ${HOME}/glytoucan/java/tmp:/tmp
+     - ${HOME}/glytoucan/maven:/root/.m2
+     - ${HOME}/glytoucan/java/upload:/upload
      - /etc/localtime:/etc/localtime
      - ./rdf.glytoucan:/workspace/rdf.glytoucan
 #     - source:/workspace

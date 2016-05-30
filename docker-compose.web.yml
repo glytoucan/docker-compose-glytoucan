@@ -7,6 +7,6 @@ services:
     ports:
      - "90:80"
     volumes:
-     - /opt/glytoucan/apachelogs:/var/log/apache2
+     - ${HOME}/glytoucan/apachelogs:/var/log/apache2
      - /etc/localtime:/etc/localtime
     restart: always

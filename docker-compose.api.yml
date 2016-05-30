@@ -5,7 +5,7 @@ services:
     ports:
       - 881:80
     volumes:
-      - /opt/glytoucan/maven:/root/.m2
+      - ${HOME}/glytoucan/maven:/root/.m2
       - ./api:/workspace
       - /etc/localtime:/etc/localtime
     working_dir: /workspace
