@@ -6,11 +6,12 @@
 #    - stanza:stanza.glytoucan.org
 stanza:
   build: docker-stanza
+#  image: glytoucan_stanza:v${GTC_VERSION}
   ports:
     - 9292:80
+  working_dir: /app/glytoucan_stanza
   volumes: 
   # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
     - .:/app
     - /etc/localtime:/etc/localtime
-  working_dir: /app/glytoucan_stanza
   restart: always
