@@ -1,21 +1,21 @@
 DOCKERUSER = dockercompose
 
 create:
-	docker volume create --name source.${GTC_VERSION}
+	docker volume create --name source.v${GTC_VERSION}
 
 cp:
-	docker run --rm -v source.${GTC_VERSION}:/workspace -v ${PWD}/rdf.glytoucan:/rdf.glytoucan debian cp -R /rdf.glytoucan /workspace/rdf.glytoucan
-	docker run --rm -v source.${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-stanza:/glytoucan-stanza debian cp -R /glytoucan-stanza /workspace/glytoucan-stanza
-	docker run --rm -v source.${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza debian cp -R /glytoucan-js-stanza /workspace/glytoucan-js-stanza
-	docker run --rm -v source.${GTC_VERSION}:/workspace -v ${PWD}/api:/api debian cp -R /api /workspace/api
-	docker run --rm -v source.${GTC_VERSION}:/workspace -v ${PWD}/api:/soap.api debian cp -R /soap.api /workspace/soap.api
-	docker run --rm -v source.${GTC_VERSION}:/workspace -v ${PWD}/pom-site:/pom-site debian cp -R /pom-site /workspace/pom-site
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/rdf.glytoucan:/rdf.glytoucan debian cp -R /rdf.glytoucan /workspace/rdf.glytoucan
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-stanza:/glytoucan-stanza debian cp -R /glytoucan-stanza /workspace/glytoucan-stanza
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza debian cp -R /glytoucan-js-stanza /workspace/glytoucan-js-stanza
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/api:/api debian cp -R /api /workspace/api
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/api:/soap.api debian cp -R /soap.api /workspace/soap.api
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/pom-site:/pom-site debian cp -R /pom-site /workspace/pom-site
 
 ls:
-	docker run --rm -v source.${GTC_VERSION}:/workspace debian ls /workspace
+	docker run --rm -v source.v${GTC_VERSION}:/workspace debian ls /workspace
 
 bash:
-	docker run --rm -it -v source.${GTC_VERSION}:/workspace --workdir /workspace/rdf.glytoucan dockercomposeglytoucan_java /bin/bash
+	docker run --rm -it -v source.v${GTC_VERSION}:/workspace --workdir /workspace/rdf.glytoucan dockercomposeglytoucan_java /bin/bash
 
 tag:
 	docker tag glytoucan_web:v${GTC_VERSION} glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
