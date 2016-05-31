@@ -8,7 +8,7 @@ cp:
 	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-stanza:/glytoucan-stanza debian cp -R /glytoucan-stanza /workspace/glytoucan-stanza
 	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza debian cp -R /glytoucan-js-stanza /workspace/glytoucan-js-stanza
 	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/api:/api debian cp -R /api /workspace/api
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/api:/soap.api debian cp -R /soap.api /workspace/soap.api
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/soap.api:/soap.api debian cp -R /soap.api /workspace/soap.api
 	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/pom-site:/pom-site debian cp -R /pom-site /workspace/pom-site
 
 ls:
