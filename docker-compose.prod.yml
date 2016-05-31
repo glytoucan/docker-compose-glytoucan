@@ -20,6 +20,8 @@ services:
       - source:/source
   js-stanza:
     image: glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
+    links:
+      - stanzaredirect:test.ts.glytoucan.org
     working_dir: /source/glytoucan-js-stanza/glytoucan_stanza/entry_provider
     volumes:
       - source:/source
