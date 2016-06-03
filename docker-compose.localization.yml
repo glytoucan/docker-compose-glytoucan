@@ -1,29 +1,31 @@
-java:
-  links:
-    - local:local.glytoucan.org
-local:
-  build: docker-local.glytoucan
-  ports:
-    - 88:80
-  volumes:
-    - /opt/glytoucan/local/apacherun:/var/run/apache2
-    - /opt/glytoucan/local/apachelogs:/var/log/apache2
-    - ./glytoucan_localization:/var/www/html
-    - /etc/localtime:/etc/localtime
-  links:
-    - local_mariadb:local.glytoucan.org
-  restart: always
-local_mariadb:
-  image: mariadb
-  ports:
-    - 3306:3306
-  volumes:
-    - /mnt/localization/mariadb/lib:/var/lib/mysql
-    - /etc/localtime:/etc/localtime
+version: '2'
+services:
+  java:
+    links:
+      - local:local.glytoucan.org
+  local:
+    build: docker-local.glytoucan
+    ports:
+      - 88:80
+    volumes:
+      - /opt/glytoucan/local/apacherun:/var/run/apache2
+      - /opt/glytoucan/local/apachelogs:/var/log/apache2
+      - ./glytoucan_localization:/var/www/html
+      - /etc/localtime:/etc/localtime
+    links:
+      - local_mariadb:local.glytoucan.org
+    restart: always
+  local_mariadb:
+    image: mariadb
+    ports:
+      - 3306:3306
+    volumes:
+      - /mnt/localization/mariadb/lib:/var/lib/mysql
+      - /etc/localtime:/etc/localtime
 #  env_file: glytoucan.env
-  environment:
-    - MYSQL_USER=local
-    - MYSQL_ROOT_PASSWORD
-    - MYSQL_PASSWORD
-    - MYSQL_DATABASE=glytoucan_localization
-  restart: always
+    environment:
+      - MYSQL_USER=local
+      - MYSQL_ROOT_PASSWORD
+      - MYSQL_PASSWORD
+      - MYSQL_DATABASE=glytoucan_localization
+    restart: always

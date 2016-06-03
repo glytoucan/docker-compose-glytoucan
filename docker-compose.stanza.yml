@@ -1,15 +1,13 @@
-#java_stanza:
-#  extends:
-#    file: docker-compose.yml
-#    service: java
-#  links:
-#    - stanza:stanza.glytoucan.org
-stanza:
-  build: docker-stanza
-  ports:
-    - 9292:80
-  volumes: 
-  # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
-    - .:/app
-    - /etc/localtime:/etc/localtime
-  restart: always
+version: '2'
+services:
+  stanza:
+    build: docker-stanza
+#    image: glytoucan_stanza:v${GTC_VERSION}
+    ports:
+      - 9292:80
+    volumes: 
+    # the dockerfile uses /app/glytoucan-stanza so glytoucan-stanza should be in workspace
+      - ./glytoucan-stanza:/app/glytoucan-stanza
+      - /etc/localtime:/etc/localtime
+    working_dir: /app/glytoucan-stanza
+    restart: always

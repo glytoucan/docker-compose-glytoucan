@@ -1,31 +1,42 @@
-web:
-  extends:
-    file: docker-compose.web.yml
-    service: web
-  links:
-   - squid:rdf.glytoucan.org
+version: '2'
+services:
+  web:
+    extends:
+      file: docker-compose.web.yml
+      service: web
+    links:
+     - squid:squid.glytoucan.org
 #   - stanza:stanza.glytoucan.org
-   - api:test.api.glytoucan.org
-   - soap.api:soap.api.glytoucan.org
-   - glycanbuilder:glycanbuilder.glytoucan.org
-   - js-stanza:js-stanza.glytoucan.org
-     #   - awstats:stats.glytoucan.org
-squid:
-  extends:
-    file: docker-compose.squid.yml
-    service: squid
-  links:
-    - java:rdf.glytoucan.org
-java:
-  extends:
-    file: docker-compose.java.yml
-    service: java
-  links:
-    - stanza:stanza.glytoucan.org
-    - api:test.api.glytoucan.org
-    - soap.api:test.soap.api.glytoucan.org
+     - api:test.api.glytoucan.org
+     - soap.api:soap.api.glytoucan.org
+     - glycanbuilder:glycanbuilder.glytoucan.org
+     - js-stanza:js-stanza.glytoucan.org
+       #   - awstats:stats.glytoucan.org
+  squid:
+    extends:
+      file: docker-compose.squid.yml
+      service: squid
+    links:
+      - java:squid.glytoucan.org
+  java:
+    extends:
+      file: docker-compose.java.yml
+      service: java
+    links:
+      - stanza:stanza.glytoucan.org
+      - api:test.api.glytoucan.org
+      - soap.api:test.soap.api.glytoucan.org
 #    - local:local.glytoucan.org
-  restart: always
+    environment:
+     - GOOGLE_OAUTH2_CLIENTID
+     - GOOGLE_OAUTH2_CLIENTSECRET
+     - SPRING_MAIL_USERNAME
+     - SPRING_MAIL_PASSWORD
+     - SPRING_TRIPLESTORE_PASSWORD
+     - SPRING_TRIPLESTORE_URL
+     - API_CONTRIBUTOR_ID
+     - API_KEY
+    restart: always
 #awstats:
 #  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-awstats
 #  ports:
@@ -37,32 +48,25 @@ java:
 #   - /var/log:/var/log
 #   - ${HOME}/${WORKSPACE}/docker-awstats/logs:/var/log/apache2
 #    - /etc/localtime:/etc/localtime         
-api:
-  extends:
-    file: docker-compose.api.yml
-    service: api
-soap.api:
-  extends:
-    file: docker-compose.soap.api.yml
-    service: soap.api
-glycanbuilder:
-  extends:
-    file: docker-compose.glycanbuilder.yml
-    service: glycanbuilder
-stanza:
-  extends:
-    file: docker-compose.stanza.yml
-    service: stanza
-  links:
-    - api:rdf.glytoucan.org
-js-stanza:
-  extends:
-    file: docker-compose.js-stanza.yml
-    service: js-stanza
-#  volumes_from:
-#    - bundle
-#bundle:
-#  image: debian:jessie
-#  command: echo bundler volume container
-#  volumes:
-#    - /bundle
+  api:
+    extends:
+      file: docker-compose.api.yml
+      service: api
+  soap.api:
+    extends:
+      file: docker-compose.soap.api.yml
+      service: soap.api
+  glycanbuilder:
+    extends:
+      file: docker-compose.glycanbuilder.yml
+      service: glycanbuilder
+  stanza:
+    extends:
+      file: docker-compose.stanza.yml
+      service: stanza
+    links:
+      - api:rdf.glytoucan.org
+  js-stanza:
+    extends:
+      file: docker-compose.js-stanza.yml
+      service: js-stanza

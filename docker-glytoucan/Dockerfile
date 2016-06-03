@@ -5,8 +5,8 @@ RUN apt-get update
 
 WORKDIR /
 
-ADD run.sh /run.sh
-RUN chmod a+x /run.sh
+#ADD run.sh /run.sh
+#RUN chmod a+x /run.sh
 
 ADD 000-default.conf /etc/apache2/sites-available/000-default.conf
 ADD 010-test.api.conf /etc/apache2/sites-available/010-test.api.conf
@@ -27,4 +27,4 @@ RUN a2enconf proxytimeout
 EXPOSE 80 443
 WORKDIR /
 
-CMD ["/run.sh"]
+#CMD ["/run.sh"]

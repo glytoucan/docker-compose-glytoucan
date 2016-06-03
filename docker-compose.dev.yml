@@ -1,30 +1,47 @@
 # This is a simple setup for java, api, and stanza.  Substructure search should be possible, however GlycanBuilder (graphics search) will not.
 # For graphics search, please use the default docker-compose.yml
-web:
-  extends:
-    file: docker-compose.web.yml
-    service: web
-  links:
-   - api:test.api.glytoucan.org
-   - js-stanza:js-stanza.glytoucan.org
-java:
-  extends:
-    file: docker-compose.java.yml
-    service: java
-  links:
-    - stanza:stanza.glytoucan.org
-    - api:test.api.glytoucan.org
-stanza:
-  extends:
-    file: docker-compose.stanza.yml
-    service: stanza
-  links:
-    - api:rdf.glytoucan.org
-api:
-  extends:
-    file: docker-compose.api.yml
-    service: api
-js-stanza:
-  extends:
-    file: docker-compose.js-stanza.yml
-    service: js-stanza
+version: '2'
+services:
+  web:
+    extends:
+      file: docker-compose.web.yml
+      service: web
+    links:
+     - api:test.api.glytoucan.org
+     - js-stanza:js-stanza.glytoucan.org
+     - java:squid.glytoucan.org
+  java:
+    extends:
+      file: docker-compose.java.yml
+      service: java
+    links:
+      - stanza:stanza.glytoucan.org
+      - api:test.api.glytoucan.org
+    env_file:
+      - google.env
+      - mail.env
+      - api.env
+    environment:
+      - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
+      - SPRING_TRIPLESTORE_PASSWORD=dba
+  stanza:
+    extends:
+      file: docker-compose.stanza.yml
+      service: stanza
+    links:
+      - api:rdf.glytoucan.org
+  api:
+    extends:
+      file: docker-compose.api.yml
+      service: api
+    env_file:
+      - ./mail.env
+      - ./triplestore.env
+      - ./api.env
+    environment:
+      - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
+      - SPRING_TRIPLESTORE_PASSWORD=dba
+  js-stanza:
+    extends:
+      file: docker-compose.js-stanza.yml
+      service: js-stanza
