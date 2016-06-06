@@ -3,12 +3,12 @@ services:
   api:
     image: maven:3.3.3-jdk-8
     ports:
-      - 881:80
+     - 881:80
     volumes:
       - ${HOME}/glytoucan/maven:/root/.m2
-      - ./api:/workspace
+      - .:/workspace
       - /etc/localtime:/etc/localtime
-    working_dir: /workspace
+    working_dir: /workspace/api
     command: mvn -U spring-boot:run
     environment:
      - SERVER_PORT
