@@ -4,12 +4,12 @@ create:
 	docker volume create --name source.v${GTC_VERSION}
 
 cp:
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/rdf.glytoucan:/rdf.glytoucan debian cp -R /rdf.glytoucan /workspace/rdf.glytoucan
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-stanza:/glytoucan-stanza debian cp -R /glytoucan-stanza /workspace/glytoucan-stanza
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza debian cp -R /glytoucan-js-stanza /workspace/glytoucan-js-stanza
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/api:/api debian cp -R /api /workspace/api
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/soap.api/api.soap:/soap.api debian cp -R /soap.api /workspace/soap.api
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/pom-site:/pom-site debian cp -R /pom-site /workspace/pom-site
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/rdf.glytoucan:/rdf.glytoucan aokinobu/debian rsync -avz /rdf.glytoucan /workspace/
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-stanza:/glytoucan-stanza aokinobu/debian rsync -avz /glytoucan-stanza /workspace/
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza aokinobu/debian rsync -avz /glytoucan-js-stanza /workspace/
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/api:/api aokinobu/debian rsync -avz /api /workspace/
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/soap.api/api.soap:/soap.api aokinobu/debian rsync -avz /soap.api /workspace/
+	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/pom-site:/pom-site aokinobu/debian rsync -avz /pom-site /workspace/
 
 ls:
 	docker run --rm -v source.v${GTC_VERSION}:/workspace debian ls /workspace
@@ -26,6 +26,7 @@ push:
 	docker push glycoinfo.org:5000/glytoucan_stanza:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_java:v${GTC_VERSION}
+	docker push glycoinfo.org:5000/glytoucan_redirect:v${GTC_VERSION}
 
 init:
 	sudo docker run -d -v /opt/jenkins/mysql/lib:/var/lib/mysql:rw -v /opt/jenkins/mysql/etc:/etc/mysql:rw aoki/docker-jenkins /bin/bash -c "/usr/bin/mysql_install_db"
