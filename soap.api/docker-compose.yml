@@ -12,7 +12,7 @@ services:
     working_dir: /workspace/soap.api
     command: mvn -U clean spring-boot:run
     environment:
-     - SERVER_PORT
+     - SERVER_PORT=80
      - MAIL_ADDRESS_FROM
      - MAIL_ADDRESS_ADMIN
      - MAIL_BODY_NEWREGISTRATION

@@ -41,4 +41,4 @@ services:
 volumes:
   source:
     external:
-      name: source.${GTC_VERSION}    
+      name: source.v${GTC_VERSION}    

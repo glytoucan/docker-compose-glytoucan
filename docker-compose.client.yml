@@ -19,3 +19,6 @@ services:
     links:
       - api:test.api.glytoucan.org
       - soap.api:test.soap.api.glytoucan.org
+    depends_on:
+      - api
+      - soap.api
