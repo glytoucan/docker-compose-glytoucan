@@ -9,7 +9,7 @@ services:
       - .:/workspace
       - /etc/localtime:/etc/localtime
     working_dir: /workspace/api
-    command: mvn -U spring-boot:run
+    command: mvn -U clean spring-boot:run
     environment:
      - SERVER_PORT
      - MAIL_ADDRESS_FROM
