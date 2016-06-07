@@ -15,7 +15,7 @@ services:
       - ./client:/workspace
       - /etc/localtime:/etc/localtime
     working_dir: /workspace
-    command: mvn -U test
+    command: /workspace/wait-for-it/wait-for-it.sh soap.api:80 -- mvn -U -DskipTests=true deploy
     links:
       - api:test.api.glytoucan.org
       - soap.api:test.soap.api.glytoucan.org
