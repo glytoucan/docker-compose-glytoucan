@@ -8,7 +8,7 @@ services:
      - squid:squid.glytoucan.org
 #   - stanza:stanza.glytoucan.org
      - api:test.api.glytoucan.org
-     - soap.api:soap.api.glytoucan.org
+     - soap.api:test.soap.api.glytoucan.org
      - glycanbuilder:glycanbuilder.glytoucan.org
      - js-stanza:js-stanza.glytoucan.org
        #   - awstats:stats.glytoucan.org
