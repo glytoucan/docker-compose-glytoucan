@@ -1,7 +1,7 @@
 version: '2'
 services:
   api:
-    image: maven:3.3.3-jdk-8
+    image: maven:3.3.9-jdk-8
     ports:
      - 881:80
     volumes:
