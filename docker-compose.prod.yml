@@ -26,8 +26,9 @@ services:
     volumes:
       - source:/source
   java:
-    image: glycoinfo.org:5000/glytoucan_java:v${GTC_VERSION}
+    image: java:8u91-jdk
     working_dir: /source/rdf.glytoucan
+    command: java -jar target/ws-1.0-SNAPSHOT.war
     volumes:
       - source:/source
   api:
