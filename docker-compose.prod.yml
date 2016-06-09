@@ -45,3 +45,4 @@ services:
       - data
   data:
     build: docker-data
+    image: glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
