@@ -1,8 +1,8 @@
 create:
 	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up data
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian mkdir /data/rdf.glytoucan
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian mkdir /data/api
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian mkdir /data/soap.api
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian [ -d /data/rdf.glytoucan ] || mkdir -p /data/rdf.glytoucan
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian [ -d /data/api ] || mkdir -p /data/api
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian [ -d /data/soap.api ] || mkdir -p /data/soap.api
 	docker tag dockercomposeglytoucan_data glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 cp:
