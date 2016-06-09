@@ -10,7 +10,7 @@ services:
       - ../pom-site:/workspace/pom-site
       - /etc/localtime:/etc/localtime
     working_dir: /workspace/soap.api
-    command: mvn -U clean spring-boot:run
+    command: mvn -U -DskipTests=true spring-boot:run
     environment:
      - SERVER_PORT=80
      - MAIL_ADDRESS_FROM

@@ -1,18 +1,20 @@
-DOCKERUSER = dockercompose
-
 create:
-	docker volume create --name source.v${GTC_VERSION}
+	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up data
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian mkdir /data/rdf.glytoucan
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian mkdir /data/api
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian mkdir /data/soap.api
+	docker tag dockercomposeglytoucan_data glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 cp:
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/rdf.glytoucan:/rdf.glytoucan aokinobu/debian rsync -avz /rdf.glytoucan /workspace/
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-stanza:/glytoucan-stanza aokinobu/debian rsync -avz /glytoucan-stanza /workspace/
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza aokinobu/debian rsync -avz /glytoucan-js-stanza /workspace/
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/api:/api aokinobu/debian rsync -avz /api /workspace/
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/soap.api/api.soap:/soap.api aokinobu/debian rsync -avz /soap.api /workspace/
-	docker run --rm -v source.v${GTC_VERSION}:/workspace -v ${PWD}/pom-site:/pom-site aokinobu/debian rsync -avz /pom-site /workspace/
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/rdf.glytoucan:/rdf.glytoucan aokinobu/debian rsync -avz /rdf.glytoucan/target/web-${GTC_VERSION}.jar /data/rdf.glytoucan/
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/glytoucan-stanza:/glytoucan-stanza aokinobu/debian rsync -avz /glytoucan-stanza /data/
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza aokinobu/debian rsync -avz /glytoucan-js-stanza /data/
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/api:/api aokinobu/debian rsync -avz /api/target/api-${GTC_VERSION}.jar /data/api/
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/soap.api:/soap.api aokinobu/debian rsync -avz /soap.api/api.soap/target/soap-${GTC_VERSION}.jar /data/soap.api/
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/pom-site:/pom-site aokinobu/debian rsync -avz /pom-site /data/
 
 ls:
-	docker run --rm -v source.v${GTC_VERSION}:/workspace debian ls /workspace
+	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian ls -alrt /data/rdf.glytoucan
 
 bash:
 	docker run --rm -it -v source.v${GTC_VERSION}:/workspace --workdir /workspace/rdf.glytoucan dockercomposeglytoucan_java /bin/bash
@@ -25,8 +27,8 @@ push:
 	docker push glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_stanza:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
-	docker push glycoinfo.org:5000/glytoucan_java:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_redirect:v${GTC_VERSION}
+	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 init:
 	sudo docker run -d -v /opt/jenkins/mysql/lib:/var/lib/mysql:rw -v /opt/jenkins/mysql/etc:/etc/mysql:rw aoki/docker-jenkins /bin/bash -c "/usr/bin/mysql_install_db"

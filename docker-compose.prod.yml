@@ -15,31 +15,33 @@ services:
     links:
       - stanzaredirect:test.ts.glytoucan.org
       - api:rdf.glytoucan.org
-    working_dir: /source/glytoucan-stanza
-    volumes:
-      - source:/source
+    working_dir: /data/glytoucan-stanza
+    volumes_from:
+      - data
   js-stanza:
     image: glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
     links:
       - stanzaredirect:test.ts.glytoucan.org
-    working_dir: /source/glytoucan-js-stanza/glytoucan_stanza/entry_provider
-    volumes:
-      - source:/source
+    working_dir: /data/glytoucan-js-stanza/glytoucan_stanza/entry_provider
+    volumes_from:
+      - data
   java:
     image: java:8u91-jdk
-    working_dir: /source/rdf.glytoucan
-    command: java -jar target/ws-1.0-SNAPSHOT.war
-    volumes:
-      - source:/source
+    working_dir: /data/rdf.glytoucan
+    command: java -jar web-1.2-SNAPSHOT.jar
+    volumes_from:
+      - data
   api:
-    working_dir: /source/api
-    volumes:
-      - source:/source
+    image: java:8u91-jdk
+    working_dir: /data/api
+    command: java -jar api-1.2-SNAPSHOT.jar
+    volumes_from:
+      - data
   soap.api:
-    working_dir: /source/soap.api
-    volumes:
-      - source:/source
-volumes:
-  source:
-    external:
-      name: source.v${GTC_VERSION}    
+    image: java:8u91-jdk
+    working_dir: /data/soap.api
+    command: java -jar soap-1.2-SNAPSHOT.jar
+    volumes_from:
+      - data
+  data:
+    build: docker-data
