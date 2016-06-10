@@ -3,6 +3,7 @@ services:
   data:
     build: docker-data
     image: glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+    container_name: glytoucanDataContainerv${GTC_VERSION}
     volumes:
       - ./rdf.glytoucan:/rdf.glytoucan
       - ./glytoucan-stanza:/glytoucan-stanza

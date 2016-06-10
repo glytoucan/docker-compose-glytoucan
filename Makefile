@@ -8,7 +8,7 @@ create:
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml rm --all -f
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml build
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml up --remove-orphans
-	docker commit dockercomposeglytoucan_data_1 glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 ls:
 	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian ls -alrt /data/rdf.glytoucan
