@@ -47,3 +47,5 @@ services:
     build: docker-data
     image: glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
     command: echo "data ready"
+    volumes:
+      - /data
