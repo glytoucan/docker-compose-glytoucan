@@ -1,6 +1,7 @@
 create:
 	docker-compose -f docker-compose.clean.yml up --remove-orphans
 	docker-compose -f docker-compose.build.yml up --remove-orphans
+	docker-compose -f docker-compose.copy.yml up --remove-orphans
 	docker commit dockercomposeglytoucan_data_1 glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 ls:
