@@ -12,6 +12,7 @@ services:
      - ${HOME}/glytoucan/java/upload:/upload
      - /etc/localtime:/etc/localtime
      - ./rdf.glytoucan:/workspace/rdf.glytoucan
+     - ./pom-site:/workspace/pom-site
 #     - source:/workspace
     working_dir: /workspace/rdf.glytoucan
 #env_file: glytoucan.env
