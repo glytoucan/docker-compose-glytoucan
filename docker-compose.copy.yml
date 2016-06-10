@@ -1,0 +1,14 @@
+version: '2'
+services:
+  data:
+    build: docker-data
+    image: glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+    volumes:
+      - ./rdf.glytoucan:/rdf.glytoucan
+      - ./glytoucan-stanza:/glytoucan-stanza
+      - ./glytoucan-js-stanza:/glytoucan-js-stanza
+      - ./api:/api
+      - ./soap.api:/soap.api
+      - ./pom-site:/pom-site
+    environment:
+      - GTC_VERSION

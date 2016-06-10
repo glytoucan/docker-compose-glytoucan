@@ -1,10 +1,7 @@
 create:
-	docker-compose -f docker-compose.clean.yml up
-	docker-compose -f docker-compose.build.yml up
+	docker-compose -f docker-compose.clean.yml up --remove-orphans
+	docker-compose -f docker-compose.build.yml up --remove-orphans
 	docker commit dockercomposeglytoucan_data_1 glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
-
-cp:
-	docker run -v ${PWD}/rdf.glytoucan:/rdf.glytoucan ${PWD}/glytoucan-stanza:/glytoucan-stanza -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza -v ${PWD}/api:/api -v ${PWD}/soap.api:/soap.api -v ${PWD}/pom-site:/pom-site dockercomposeglytoucan_data
 
 ls:
 	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian ls -alrt /data/rdf.glytoucan
