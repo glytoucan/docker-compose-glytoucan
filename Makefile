@@ -1,17 +1,10 @@
 create:
-	docker-compose -f docker-compose.yml -f docker-compose.prod.yml up data
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian [ -d /data/rdf.glytoucan ] || mkdir -p /data/rdf.glytoucan
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian [ -d /data/api ] || mkdir -p /data/api
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian [ -d /data/soap.api ] || mkdir -p /data/soap.api
-	docker tag dockercomposeglytoucan_data glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	docker-compose -f docker-compose.clean.yml up
+	docker-compose -f docker-compose.build.yml up
+	docker commit dockercomposeglytoucan_data_1 glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 cp:
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/rdf.glytoucan:/rdf.glytoucan aokinobu/debian rsync -avz /rdf.glytoucan/target/web-${GTC_VERSION}.jar /data/rdf.glytoucan/
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/glytoucan-stanza:/glytoucan-stanza aokinobu/debian rsync -avz /glytoucan-stanza /data/
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza aokinobu/debian rsync -avz /glytoucan-js-stanza /data/
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/api:/api aokinobu/debian rsync -avz /api/target/api-${GTC_VERSION}.jar /data/api/
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/soap.api:/soap.api aokinobu/debian rsync -avz /soap.api/api.soap/target/soap-${GTC_VERSION}.jar /data/soap.api/
-	docker run --rm --volumes-from dockercomposeglytoucan_data_1 -v ${PWD}/pom-site:/pom-site aokinobu/debian rsync -avz /pom-site /data/
+	docker run -v ${PWD}/rdf.glytoucan:/rdf.glytoucan ${PWD}/glytoucan-stanza:/glytoucan-stanza -v ${PWD}/glytoucan-js-stanza:/glytoucan-js-stanza -v ${PWD}/api:/api -v ${PWD}/soap.api:/soap.api -v ${PWD}/pom-site:/pom-site dockercomposeglytoucan_data
 
 ls:
 	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian ls -alrt /data/rdf.glytoucan
@@ -20,7 +13,7 @@ bash:
 	docker run --rm -it -v source.v${GTC_VERSION}:/workspace --workdir /workspace/rdf.glytoucan dockercomposeglytoucan_java /bin/bash
 
 tag:
-	docker tag glytoucan_web:v${GTC_VERSION} glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
+	docker tag dockercomposeglytoucan_data_1 glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 #docker run -v /etc/localtime:/etc/localtime:ro -i -t mattdm/fedora /bin/bash
 
 push:
