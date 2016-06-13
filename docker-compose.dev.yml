@@ -10,6 +10,7 @@ services:
 #     - api:test.api.glytoucan.org
      - js-stanza:js-stanza.glytoucan.org
      - java:squid.glytoucan.org
+    restart: never
   java:
     extends:
       file: docker-compose.java.yml
@@ -24,6 +25,7 @@ services:
     environment:
       - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
       - SPRING_TRIPLESTORE_PASSWORD=dba
+    restart: never
   stanza:
     extends:
       file: docker-compose.stanza.yml
@@ -41,7 +43,9 @@ services:
 #    environment:
 #      - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
 #      - SPRING_TRIPLESTORE_PASSWORD=dba
+    restart: never
   js-stanza:
     extends:
       file: docker-compose.js-stanza.yml
       service: js-stanza
+    restart: never
