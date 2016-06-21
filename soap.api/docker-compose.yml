@@ -5,7 +5,7 @@ services:
     ports:
       - 8888:80
     volumes:
-      - /opt/maven/m2:/root/.m2
+      - ${HOME}/glytoucan/maven:/root/.m2
       - ./api.soap:/workspace/soap.api
       - ../pom-site:/workspace/pom-site
       - /etc/localtime:/etc/localtime
