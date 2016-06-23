@@ -3,4 +3,4 @@ services:
   soap.api:
     extends:
       file: api.soap/docker-compose.yml
-      service: soap.api
+      service: api.soap
