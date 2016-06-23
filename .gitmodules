@@ -50,3 +50,6 @@
 	path = docker-apache-stanza.redirect
 	url = https://github.com/glytoucan/docker-apache-stanza.redirect.git
 	branch = master
+[submodule "api.soap"]
+	path = api.soap
+	url = https://github.com/glytoucan/api.soap.git
