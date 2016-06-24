@@ -13,6 +13,7 @@ services:
      - ./pom-site:/workspace/pom-site
 #     - source:/workspace
     working_dir: /workspace/rdf.glytoucan
+    command: mvn -U -DskipTests=true spring-boot:run
 #env_file: glytoucan.env
     environment:
      - HOSTNAME=rdf.glytoucan
