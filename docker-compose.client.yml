@@ -6,7 +6,7 @@ services:
       service: api
   soap.api:
     extends:
-      file: soap.api/docker-compose.yml
+      file: docker-compose.soap.api.yml
       service: soap.api
   client:
     image: maven:3.3.9-jdk-8
@@ -15,7 +15,7 @@ services:
       - ./client:/workspace
       - /etc/localtime:/etc/localtime
     working_dir: /workspace
-    command: /workspace/wait-for-it/wait-for-it.sh soap.api:80 -- mvn -U -DskipTests=true deploy
+    command: /workspace/wait-for-it/wait-for-it.sh soap.api:80 -- mvn deploy
     links:
       - api:test.api.glytoucan.org
       - soap.api:test.soap.api.glytoucan.org

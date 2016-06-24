@@ -9,7 +9,7 @@ services:
       - ./glytoucan-stanza:/glytoucan-stanza
       - ./glytoucan-js-stanza:/glytoucan-js-stanza
       - ./api:/api
-      - ./soap.api:/soap.api
+      - ./api.soap:/api.soap
       - ./pom-site:/pom-site
     environment:
       - GTC_VERSION

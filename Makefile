@@ -1,13 +1,16 @@
 create:
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml rm --all -f
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml build
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml up --remove-orphans
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml rm --all -f
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml build
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml up --remove-orphans
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml rm --all -f
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml rm -f
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d api
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d soap.api
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up client
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml rm -f
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml up
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml rm -f
+#	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml build
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml up
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml rm -f
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml build
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml up --remove-orphans
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml up
 	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 ls:
@@ -26,6 +29,9 @@ push:
 	docker push glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_redirect:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+# remove after pushing
+	docker rm glytoucanDataContainerv${GTC_VERSION}
+	docker rmi glycoinfo.org:5000/glytoucan_data:v1.2
 
 init:
 	sudo docker run -d -v /opt/jenkins/mysql/lib:/var/lib/mysql:rw -v /opt/jenkins/mysql/etc:/etc/mysql:rw aoki/docker-jenkins /bin/bash -c "/usr/bin/mysql_install_db"
