@@ -28,19 +28,19 @@ services:
   java:
     image: java:8u91-jdk
     working_dir: /data/rdf.glytoucan
-    command: java -jar web-1.2-SNAPSHOT.jar
+    command: java -jar web-${GTC_VERSION}.jar
     volumes_from:
       - data
   api:
     image: java:8u91-jdk
     working_dir: /data/api
-    command: java -jar api-1.2-SNAPSHOT.jar
+    command: java -jar api-${GTC_VERSION}.jar
     volumes_from:
       - data
   soap.api:
     image: java:8u91-jdk
     working_dir: /data/soap.api
-    command: java -jar soap-1.2-SNAPSHOT.jar
+    command: java -jar soap-${GTC_VERSION}.jar
     volumes_from:
       - data
   data:
