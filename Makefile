@@ -32,8 +32,8 @@ push:
 	docker push glycoinfo.org:5000/glytoucan_redirect:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 # remove after pushing
-	docker rm glytoucanDataContainerv${GTC_VERSION}
-	docker rmi glycoinfo.org:5000/glytoucan_data:v1.2
+#	docker rm glytoucanDataContainerv${GTC_VERSION}
+	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 init:
 	sudo docker run -d -v /opt/jenkins/mysql/lib:/var/lib/mysql:rw -v /opt/jenkins/mysql/etc:/etc/mysql:rw aoki/docker-jenkins /bin/bash -c "/usr/bin/mysql_install_db"
