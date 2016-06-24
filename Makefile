@@ -4,6 +4,7 @@ create:
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d --remove-orphans api
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d --remove-orphans api
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up --remove-orphans client
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml stop
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml rm -f
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml up --remove-orphans 
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml rm -f
