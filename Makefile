@@ -1,17 +1,17 @@
 create:
 	chmod a+x client/wait/wait-for-it.sh
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml rm -f
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d api
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d soap.api
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up client
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d api --remove-orphans 
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d soap.api --remove-orphans 
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up client --remove-orphans 
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml rm -f
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml up
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.clean.yml up --remove-orphans 
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml rm -f
 #	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml build
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml up
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.build.yml up --remove-orphans 
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml rm -f
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml build
-	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml up
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml up --remove-orphans 
 	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 ls:
