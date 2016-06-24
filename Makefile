@@ -1,4 +1,5 @@
 create:
+	cd client; git submodule update --init --recursive --remote; cd ..
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml rm -f
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d api
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d soap.api
