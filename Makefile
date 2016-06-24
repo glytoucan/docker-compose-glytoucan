@@ -1,4 +1,5 @@
 create:
+	chmod a+x client/wait/wait-for-it.sh
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml rm -f
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d api
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.client.yml up -d soap.api
