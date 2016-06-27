@@ -30,7 +30,7 @@ services:
     working_dir: /data/rdf.glytoucan
     command: java -jar web-${GTC_VERSION}.jar
     environment:
-      - sitemapHostname=http://glytoucan.org
+      - sitemapHostname=https://glytoucan.org
     volumes_from:
       - data
   api:
