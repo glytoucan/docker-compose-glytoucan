@@ -29,6 +29,8 @@ services:
     image: java:8u91-jdk
     working_dir: /data/rdf.glytoucan
     command: java -jar web-${GTC_VERSION}.jar
+    environment:
+      - sitemapHostname=http://glytoucan.org
     volumes_from:
       - data
   api:

@@ -16,7 +16,7 @@ services:
     command: mvn -U -DskipTests=true spring-boot:run
 #env_file: glytoucan.env
     environment:
-     - HOSTNAME=rdf.glytoucan
+     - sitemapHostname=http://beta.glytoucan.org
 #  links:
 #    - stanza:stanza.glytoucan.org
 #    - api:test.api.glytoucan.org
