@@ -14,6 +14,7 @@ create:
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml build
 	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.copy.yml up --remove-orphans 
 	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.yml -f docker-compose.prod.yml create
 
 ls:
 	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian ls -alrt /data/rdf.glytoucan
@@ -26,11 +27,7 @@ tag:
 #docker run -v /etc/localtime:/etc/localtime:ro -i -t mattdm/fedora /bin/bash
 
 push:
-	docker push glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
-	docker push glycoinfo.org:5000/glytoucan_stanza:v${GTC_VERSION}
-	docker push glycoinfo.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
-	docker push glycoinfo.org:5000/glytoucan_redirect:v${GTC_VERSION}
-	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	GTC_VERSION=${GTC_VERSION} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push
 # remove after pushing
 #	docker rm glytoucanDataContainerv${GTC_VERSION}
 #	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
