@@ -13,9 +13,18 @@ services:
      - ./pom-site:/workspace/pom-site
 #     - source:/workspace
     working_dir: /workspace/rdf.glytoucan
-    command: mvn -U -DskipTests=true spring-boot:run
+    command: mvn -U -DskipTests=true -T 2C spring-boot:run
 #env_file: glytoucan.env
     environment:
+     - GOOGLE_OAUTH2_CLIENTID
+     - GOOGLE_OAUTH2_CLIENTSECRET
+     - SPRING_MAIL_USERNAME
+     - SPRING_MAIL_PASSWORD
+     - SPRING_TRIPLESTORE_PASSWORD
+     - SPRING_TRIPLESTORE_URL
+     - API_CONTRIBUTOR_ID
+     - API_KEY
+     - GTC_VERSION
      - sitemapHostname=http://beta.glytoucan.org
 #  links:
 #    - stanza:stanza.glytoucan.org
