@@ -15,7 +15,7 @@ services:
       - ${PARENT_WORKSPACE}/${WORKSPACE}/docker-compose-glytoucan:/workspace
       - /etc/localtime:/etc/localtime
     working_dir: /workspace/client
-    command: /workspace/wait/wait-for-it.sh soap.api:80 -- mvn deploy
+    command: /workspace/client/wait/wait-for-it.sh soap.api:80 -- mvn deploy
     links:
       - api:test.api.glytoucan.org
       - soap.api:test.soap.api.glytoucan.org
