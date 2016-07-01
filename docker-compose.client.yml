@@ -12,9 +12,9 @@ services:
     image: maven:3.3.9-jdk-8
     volumes:
       - ${HOME}/glytoucan/maven:/root/.m2
-      - ./client:/workspace
+      - ${PARENT_WORKSPACE}/${WORKSPACE}/docker-compose-glytoucan:/workspace
       - /etc/localtime:/etc/localtime
-    working_dir: /workspace
+    working_dir: /workspace/client
     command: /workspace/wait/wait-for-it.sh soap.api:80 -- mvn deploy
     links:
       - api:test.api.glytoucan.org
