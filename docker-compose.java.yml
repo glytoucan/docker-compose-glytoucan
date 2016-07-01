@@ -9,7 +9,7 @@ services:
      - ${HOME}/glytoucan/maven:/root/.m2
      - ${HOME}/glytoucan/java/upload:/upload
      - /etc/localtime:/etc/localtime
-     - ${PARENT_WORKSPACE}/${WORKSPACE}/docker-compose-glytoucan:/workspace
+     - ${WORKSPACE_PARENT}/${WORKSPACE}/docker-compose-glytoucan:/workspace
     working_dir: /workspace/rdf.glytoucan
     command: mvn -U -DskipTests=true -T 2C spring-boot:run
 #env_file: glytoucan.env
