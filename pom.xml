@@ -1,0 +1,34 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.glytoucan</groupId>
+		<artifactId>pom-site</artifactId>
+		<version>1.2.1-SNAPSHOT</version>
+		<relativePath>./pom-site/pom.xml</relativePath>
+	</parent>
+
+<groupId>org.glytoucan</groupId>
+<artifactId>pom</artifactId>
+<version>1.2.1-SNAPSHOT</version>
+<packaging>pom</packaging>
+
+	<properties>
+		<changelog.fileUri>${changelog.github.fileUri}</changelog.fileUri>
+		<changelog.revision.fileUri>${changelog.revision.github.fileUri}</changelog.revision.fileUri>
+		<cobertura.base.package>org.glytoucan.web</cobertura.base.package>
+		<inceptionYear>2016</inceptionYear>
+		<repository.domain>github.com</repository.domain>
+		<repository.user>glytoucan</repository.user>
+		<repository.name>rdf.glytoucan</repository.name>
+		<java.version>1.8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+<modules>
+  <module>rdf.glytoucan</module>
+  <module>api</module>
+  <module>api.soap</module>
+  <module>client</module>
+</modules>
+</project>
