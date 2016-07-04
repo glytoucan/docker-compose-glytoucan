@@ -7,4 +7,4 @@ services:
       - .:/workspace
       - /etc/localtime:/etc/localtime
     working_dir: /workspace/
-    command: mvn versions:set -DnewVersion=${GTC_VERSION} -DgenerateBackupPoms=false
+    command: mvn versions:set -DnewVersion=${GTC_VERSION} -DgenerateBackupPoms=false -DskipTests=true deploy
