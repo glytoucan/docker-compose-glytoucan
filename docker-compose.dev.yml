@@ -25,6 +25,7 @@ services:
     environment:
       - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
       - SPRING_TRIPLESTORE_PASSWORD=dba
+      - GTC_VERSION=DEV_VERSION
     restart: never
   stanza:
     extends:
