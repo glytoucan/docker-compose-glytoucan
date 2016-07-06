@@ -1,6 +1,7 @@
 create:
 	chmod a+x client/wait/wait-for-it.sh
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.version.yml up
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.deployparent.yml up
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml up -d --remove-orphans api
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml up -d --remove-orphans soap.api
