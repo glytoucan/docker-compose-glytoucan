@@ -1,6 +1,7 @@
 create:
 	chmod a+x client/wait/wait-for-it.sh
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.version.yml up
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.deployparent.yml up
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml up -d --remove-orphans api
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml up -d --remove-orphans soap.api
@@ -24,7 +25,7 @@ bash:
 	docker run --rm -it -v source.v${GTC_VERSION}:/workspace --workdir /workspace/rdf.glytoucan dockercomposeglytoucan_java /bin/bash
 
 tag:
-	docker tag dockercomposeglytoucan_data_1 glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	git tag -d ${GTC_VERSION}
 #docker run -v /etc/localtime:/etc/localtime:ro -i -t mattdm/fedora /bin/bash
 
 push:
