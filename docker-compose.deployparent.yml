@@ -1,0 +1,10 @@
+version: '2'
+services:
+  version:
+    image: maven:3.3.9-jdk-8
+    volumes:
+      - ${HOME}/glytoucan/maven:/root/.m2
+      - .:/workspace
+      - /etc/localtime:/etc/localtime
+    working_dir: /workspace/
+    command: mvn -N deploy
