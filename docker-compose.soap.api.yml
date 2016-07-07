@@ -4,3 +4,5 @@ services:
     extends:
       file: api.soap/docker-compose.yml
       service: api.soap
+    environment:
+     - MAVEN_OPTS=-da:org.openrdf...
