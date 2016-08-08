@@ -4,7 +4,7 @@ services:
     image: maven:3.3.9-jdk-8
     volumes:
       - ${HOME}/glytoucan/maven:/root/.m2
-      - .:/workspace
+      - ${PWD}:/workspace
       - /etc/localtime:/etc/localtime
     working_dir: /workspace/
     command: mvn versions:set -DnewVersion=${GTC_VERSION} -DgenerateBackupPoms=false
