@@ -6,6 +6,7 @@ services:
       - ${HOME}/glytoucan/maven:/root/.m2
       - .:/workspace
       - /etc/localtime:/etc/localtime
+      - ${SETTINGS_PATH}:/root/.m2/settings.xml
     working_dir: /workspace/
     command: mvn -N deploy
     network_mode: "host"
