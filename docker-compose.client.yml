@@ -10,7 +10,6 @@ services:
       file: docker-compose.soap.api.yml
       service: soap.api
     network_mode: "host"     
-  soap.api:
   client:
     image: maven:3.3.9-jdk-8
     volumes:
