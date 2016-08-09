@@ -4,9 +4,8 @@ services:
     image: maven:3.3.9-jdk-8
     volumes:
       - ${HOME}/glytoucan/maven:/root/.m2
-      - .:/workspace
+      - ${PWD}:/workspace
       - /etc/localtime:/etc/localtime
-      - ${SETTINGS_PATH}:/root/.m2/settings.xml
     working_dir: /workspace/
     command: mvn -N deploy
     network_mode: "host"
