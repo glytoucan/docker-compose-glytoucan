@@ -25,7 +25,8 @@ bash:
 	docker run --rm -it -v source.v${GTC_VERSION}:/workspace --workdir /workspace/rdf.glytoucan dockercomposeglytoucan_java /bin/bash
 
 tag:
-	git tag -d ${GTC_VERSION}
+	git tag ${GTC_VERSION}
+	git push --tags
 #docker run -v /etc/localtime:/etc/localtime:ro -i -t mattdm/fedora /bin/bash
 
 push:
