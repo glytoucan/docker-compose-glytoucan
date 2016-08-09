@@ -1,8 +1,10 @@
+deployparent:
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.version.yml up
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.deployparent.yml up
+
 create:
 	#/var/jenkins_home/workspace/docker-compose-glytoucan-build-prod
 	chmod a+x client/wait/wait-for-it.sh
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.version.yml up
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.deployparent.yml up
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml up -d --remove-orphans api
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml up -d --remove-orphans soap.api
