@@ -4,12 +4,10 @@ services:
     extends:
       file: docker-compose.api.yml
       service: api
-    network_mode: "host"     
   soap.api:
     extends:
       file: docker-compose.soap.api.yml
       service: soap.api
-    network_mode: "host"     
   client:
     image: maven:3.3.9-jdk-8
     volumes:
@@ -24,4 +22,3 @@ services:
     depends_on:
       - api
       - soap.api
-    network_mode: "host"
