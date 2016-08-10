@@ -11,7 +11,7 @@ services:
      - /etc/localtime:/etc/localtime
      - ${WORKSPACE_PARENT}/${WORKSPACE}/${PROJECT}:/workspace
     working_dir: /workspace/rdf.glytoucan
-    command: mvn -U -DskipTests=true -T 2C spring-boot:run
+    command: mvn -U -DskipTests=true spring-boot:run
 #env_file: glytoucan.env
     environment:
      - GOOGLE_OAUTH2_CLIENTID
