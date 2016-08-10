@@ -8,4 +8,3 @@ services:
       - /etc/localtime:/etc/localtime
     working_dir: /workspace/
     command: mvn -N deploy
-    network_mode: "host"
