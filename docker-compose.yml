@@ -1,17 +1,14 @@
 version: '2'
 services:
+# glytoucan.org domain - /glycanbuilder, /stanza and squid
   web:
     extends:
       file: docker-compose.web.yml
       service: web
     links:
      - squid:squid.glytoucan.org
-#   - stanza:stanza.glytoucan.org
-     - api:test.api.glytoucan.org
-     - soap.api:test.soap.api.glytoucan.org
      - glycanbuilder:glycanbuilder.glytoucan.org
      - js-stanza:js-stanza.glytoucan.org
-       #   - awstats:stats.glytoucan.org
   squid:
     extends:
       file: docker-compose.squid.yml
@@ -52,6 +49,8 @@ services:
     extends:
       file: docker-compose.api.yml
       service: api
+    links:
+      - user:test.user.ts.glytoucan.org
   soap.api:
     extends:
       file: docker-compose.soap.api.yml
@@ -70,3 +69,17 @@ services:
     extends:
       file: docker-compose.js-stanza.yml
       service: js-stanza
+# api.glytoucan.org domain - including /soap 
+  proxy:
+    build: ./docker-apache-api/
+    volumes:
+      - /etc/localtime:/etc/localtime
+    links:
+      - api:test.api.glytoucan.org
+      - soap.api:test.soap.api.glytoucan.org
+    ports:
+      - 891:80
+  user:
+    extends: 
+      file: docker-compose.user.yml
+      service: virtuoso
