@@ -1,0 +1,11 @@
+version: '2'
+services:
+  virtuoso:
+    build: ./docker-virtuoso/
+    ports:
+      - 2222:1111
+      - 8892:8890
+    volumes:
+      - ${HOME}/virtuoso.user:/virtuoso
+      - /etc/localtime:/etc/localtime
+    restart: always
