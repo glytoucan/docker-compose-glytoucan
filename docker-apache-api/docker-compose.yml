@@ -1,0 +1,19 @@
+version: '2'
+services:
+  api:
+    extends:
+      file: ../docker-compose.api.yml
+      service: api
+  soap.api:
+    extends:
+      file: ../docker-compose.soap.api.yml
+      service: soap.api
+  proxy:
+    build: .
+    volumes:
+      - /etc/localtime:/etc/localtime
+    links:
+      - api:test.api.glytoucan.org
+      - soap.api:test.soap.api.glytoucan.org
+    ports:
+      - 891:80
