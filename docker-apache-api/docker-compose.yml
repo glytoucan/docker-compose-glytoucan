@@ -8,6 +8,10 @@ services:
     extends:
       file: ../docker-compose.soap.api.yml
       service: soap.api
+  admin.api:
+    extends:
+      file: ../admin/docker-compose.yml
+      service: admin
   proxy:
     build: .
     volumes:
@@ -15,5 +19,6 @@ services:
     links:
       - api:test.api.glytoucan.org
       - soap.api:test.soap.api.glytoucan.org
+      - admin.api:test.admin.api.glytoucan.org
     ports:
       - 891:80

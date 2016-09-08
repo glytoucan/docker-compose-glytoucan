@@ -49,3 +49,6 @@
 [submodule "api.soap"]
 	path = api.soap
 	url = https://github.com/glytoucan/api.soap.git
+[submodule "admin"]
+	path = admin
+	url = https://github.com/glytoucan/admin.git

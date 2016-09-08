@@ -83,3 +83,7 @@ services:
     extends: 
       file: docker-compose.user.yml
       service: virtuoso
+  admin:
+    extends:
+      file: ./admin/docker-compose.yml
+      service: admin
