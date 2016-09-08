@@ -77,9 +77,14 @@ services:
     links:
       - api:test.api.glytoucan.org
       - soap.api:test.soap.api.glytoucan.org
+      - admin:test.admin.api.glytoucan.org
     ports:
       - 891:80
   user:
     extends: 
       file: docker-compose.user.yml
       service: virtuoso
+  admin:
+    extends:
+      file: ./admin/docker-compose.yml
+      service: admin
