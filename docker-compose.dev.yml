@@ -19,13 +19,14 @@ services:
       - stanza:stanza.glytoucan.org
 #      - api:test.api.glytoucan.org
     env_file:
-      - google.env
-      - mail.env
-      - api.env
+      - ./mail.env
+      - ./api.env
     environment:
       - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
       - SPRING_TRIPLESTORE_PASSWORD=dba
       - GTC_VERSION=DEV_VERSION
+      - GOOGLE_OAUTH2_CLIENTID=144546288829-o7vr36n5s7it71pi6tandfmsqteq38p3.apps.googleusercontent.com
+      - GOOGLE_OAUTH2_CLIENTSECRET=Lpd2gIA6fRMgYuH3dhmrTx-O
     restart: never
   stanza:
     extends:
@@ -50,3 +51,5 @@ services:
       file: docker-compose.js-stanza.yml
       service: js-stanza
     restart: never
+
+
