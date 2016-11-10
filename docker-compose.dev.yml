@@ -46,15 +46,15 @@ services:
 #      - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
 #      - SPRING_TRIPLESTORE_PASSWORD=dba
     restart: never
-    volumes_from:
-      - bundle
+    # volumes_from:
+    #   - bundle
   js-stanza:
     extends:
       file: docker-compose.js-stanza.yml
       service: js-stanza
     restart: never
-  bundle:
-    image: debian
-    command: echo bundle path holder
-    volumes:
-      - /bundle
+  # bundle:
+  #   image: debian
+  #   command: echo bundle path holder
+  #   volumes:
+  #     - /bundle
