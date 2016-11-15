@@ -30,5 +30,6 @@
   <module>api</module>
   <module>api.soap</module>
   <module>client</module>
+  <module>admin</module>
 </modules>
 </project>
