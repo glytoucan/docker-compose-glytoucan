@@ -1,7 +1,8 @@
 version: '2'
 services:
   virtuoso:
-    build: ./docker-virtuoso/
+    build: ./docker-virtuoso
+    image: aokinobu/virtuoso
     ports:
       - 2222:1111
       - 8892:8890
