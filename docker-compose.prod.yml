@@ -53,7 +53,7 @@ services:
       - /data
   admin:
     image: java:8u91-jdk
-    working_dir: /data/soap.api
-    command: java -jar soap-${GTC_VERSION}.jar
+    working_dir: /data/admin
+    command: java -jar admin-${GTC_VERSION}.jar
     volumes_from:
       - data
