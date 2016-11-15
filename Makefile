@@ -1,3 +1,7 @@
+upgrade:
+	mvn --batch-mode release:update-versions -Dversion=1.2.6-TOCO
+#	mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.0-SNAPSHOT
+
 deployparent:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.version.yml up
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.deployparent.yml up
