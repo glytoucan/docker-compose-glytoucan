@@ -51,3 +51,7 @@ services:
     command: echo "data ready"
     volumes:
       - /data
+  user:
+    image: glycoinfo.org:5000/user_virtuoso:v${GTC_VERSION}
+  admin:
+    image: glycoinfo.org:5000/admin:v${GTC_VERSION}
