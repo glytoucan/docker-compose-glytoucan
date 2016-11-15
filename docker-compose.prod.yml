@@ -52,7 +52,7 @@ services:
     volumes:
       - /data
   admin:
-    image: glycoinfo.org:5000/admin:v${GTC_VERSION}
+    image: java:8u91-jdk
     working_dir: /data/soap.api
     command: java -jar soap-${GTC_VERSION}.jar
     volumes_from:
