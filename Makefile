@@ -1,10 +1,15 @@
 upgrade:
 	mvn --batch-mode release:update-versions -Dversion=1.2.6-TOCO
 #	mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.0-SNAPSHOT
+#	this only upgrades for dev version....
 
 deployparent:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.version.yml up
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.deployparent.yml up
+
+rm:
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml rm -f
+	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 
 create:
 	#/var/jenkins_home/workspace/docker-compose-glytoucan-build-prod
@@ -20,7 +25,6 @@ create:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml build
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml up --remove-orphans 
-	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
@@ -51,9 +55,6 @@ ps:
 
 stop:
 	sudo docker stop docker-jenkins_bluetree
-
-rm:
-	sudo docker rm docker-jenkins_bluetree
 
 logs:
 	sudo docker logs --tail=100 -f docker-jenkins_bluetree
