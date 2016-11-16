@@ -20,6 +20,7 @@ create:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml build
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml up --remove-orphans 
+	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
