@@ -5,26 +5,26 @@ services:
       file: docker-compose.java.yml
       service: java
     image: maven:3.3.9-jdk-8
-    command: mvn -DskipTests=true clean package
+    command: mvn -U -DskipTests=true clean package
     restart: never
   api:
     extends:
       file: docker-compose.api.yml
       service: api
     image: maven:3.3.9-jdk-8
-    command: mvn -DskipTests=true clean package
+    command: mvn -U -DskipTests=true clean package
     restart: never
   soap.api:
     extends:
       file: docker-compose.soap.api.yml
       service: soap.api
     image: maven:3.3.9-jdk-8
-    command: mvn -DskipTests=true clean package spring-boot:repackage
+    command: mvn -U -DskipTests=true clean package spring-boot:repackage
     restart: never
   admin:
     extends:
       file: ./admin/docker-compose.yml
       service: admin
     image: maven:3.3.9-jdk-8
-    command: mvn -DskipTests=true clean package spring-boot:repackage
+    command: mvn -U -DskipTests=true clean package spring-boot:repackage
     restart: never
