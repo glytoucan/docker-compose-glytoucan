@@ -1,6 +1,6 @@
 upgrade:
-	mvn --batch-mode release:update-versions -Dversion=1.2.6-TOCO
-#	mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.0-SNAPSHOT
+#	mvn --batch-mode release:update-versions -Dversion=1.2.6-TOCO doesntwork
+	mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.6-TOCO-SNAPSHOT
 #	this only upgrades for dev version....
 
 deployparent:
@@ -25,10 +25,6 @@ create:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml build
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml up --remove-orphans 
-	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
-	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml create
 
 ls:
 	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian ls -alrt /data/rdf.glytoucan
@@ -42,6 +38,10 @@ tag:
 #docker run -v /etc/localtime:/etc/localtime:ro -i -t mattdm/fedora /bin/bash
 
 push:
+	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml create
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push
 # remove after pushing
 #	docker rm glytoucanDataContainerv${GTC_VERSION}
