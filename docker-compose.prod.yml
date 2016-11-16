@@ -51,3 +51,9 @@ services:
     command: echo "data ready"
     volumes:
       - /data
+  admin:
+    image: java:8u91-jdk
+    working_dir: /data/admin
+    command: java -jar admin-${GTC_VERSION}.jar
+    volumes_from:
+      - data

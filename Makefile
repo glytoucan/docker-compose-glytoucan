@@ -1,3 +1,7 @@
+upgrade:
+	mvn --batch-mode release:update-versions -Dversion=1.2.6-TOCO
+#	mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.0-SNAPSHOT
+
 deployparent:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.version.yml up
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.deployparent.yml up
@@ -6,9 +10,6 @@ create:
 	#/var/jenkins_home/workspace/docker-compose-glytoucan-build-prod
 	chmod a+x client/wait/wait-for-it.sh
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml rm -f
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml up -d --remove-orphans api
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml up -d --remove-orphans soap.api
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml up --remove-orphans client
 #	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml stop
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.clean.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.clean.yml up --remove-orphans 
@@ -19,7 +20,10 @@ create:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml build
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml up --remove-orphans 
+	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml create
 
 ls:

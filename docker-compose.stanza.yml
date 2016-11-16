@@ -2,7 +2,8 @@ version: '2'
 services:
   stanza:
     build: docker-stanza
-    command: /usr/local/bundle/bin/bundle exec rackup -p 80
+    command: /usr/local/bin/bundle exec rackup -p 80
+#    command: /usr/local/bundle/bin/bundle exec rake rails:update:bin -p 80
 #    image: glytoucan_stanza:v${GTC_VERSION}
     ports:
       - 9292:80

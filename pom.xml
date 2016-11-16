@@ -10,7 +10,7 @@
 
 <groupId>org.glytoucan</groupId>
 <artifactId>pom</artifactId>
-<version>1.2.6-TOCO-SNAPSHOT</version>
+<version>1.2.6.1-TOCO-SNAPSHOT</version>
 <packaging>pom</packaging>
 
 	<properties>
@@ -30,5 +30,6 @@
   <module>api</module>
   <module>api.soap</module>
   <module>client</module>
+  <module>admin</module>
 </modules>
 </project>

@@ -11,5 +11,6 @@ services:
       - ./api:/api
       - ./api.soap:/api.soap
       - ./pom-site:/pom-site
+      - ./admin:/admin
     environment:
       - GTC_VERSION

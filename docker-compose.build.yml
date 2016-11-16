@@ -21,3 +21,10 @@ services:
     image: maven:3.3.9-jdk-8
     command: mvn -DskipTests=true clean package spring-boot:repackage
     restart: never
+  admin:
+    extends:
+      file: ./admin/docker-compose.yml
+      service: admin
+    image: maven:3.3.9-jdk-8
+    command: mvn -DskipTests=true clean package spring-boot:repackage
+    restart: never

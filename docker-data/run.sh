@@ -27,5 +27,13 @@ then
 #  echo waiting for jar compression
 #  sleep 10
   rsync -avz /api.soap/target/soap-${GTC_VERSION}.jar /data/soap.api/
+  while [ ! -f /admin/target/admin-${GTC_VERSION}.jar ]
+  do
+    echo waiting for admin-${GTC_VERSION}.jar
+    sleep 2
+  done
+#  echo waiting for jar compression
+#  sleep 10
+  rsync -avz /admin/target/admin-${GTC_VERSION}.jar /data/admin/
   rsync -avz /pom-site /data/
 fi
