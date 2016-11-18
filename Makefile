@@ -1,6 +1,7 @@
 upgrade:
+	mvn --batch-mode release:update-versions 
+	#mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.6-TOCO-SNAPSHOT
 #	mvn --batch-mode release:update-versions -Dversion=1.2.6-TOCO doesntwork
-	mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.6-TOCO-SNAPSHOT
 #	this only upgrades for dev version....
 
 deployparent:
