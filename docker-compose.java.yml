@@ -23,6 +23,7 @@ services:
      - API_CONTRIBUTOR_ID
      - API_KEY
      - GTC_VERSION
+     - ADMIN_KEY
      - sitemapHostname=http://beta.glytoucan.org
 #  links:
 #    - stanza:stanza.glytoucan.org
