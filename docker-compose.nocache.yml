@@ -1,0 +1,86 @@
+version: '2'
+services:
+# glytoucan.org domain - /glycanbuilder, /stanza and squid
+  web:
+    extends:
+      file: docker-compose.web.yml
+      service: web
+    links:
+     - java:squid.glytoucan.org
+     - glycanbuilder:glycanbuilder.glytoucan.org
+     - js-stanza:js-stanza.glytoucan.org
+  java:
+    extends:
+      file: docker-compose.java.yml
+      service: java
+    links:
+      - stanza:stanza.glytoucan.org
+      - proxy:test.api.glytoucan.org
+#    - local:local.glytoucan.org
+    environment:
+     - GOOGLE_OAUTH2_CLIENTID
+     - GOOGLE_OAUTH2_CLIENTSECRET
+     - SPRING_MAIL_USERNAME
+     - SPRING_MAIL_PASSWORD
+     - SPRING_TRIPLESTORE_PASSWORD
+     - SPRING_TRIPLESTORE_URL
+     - API_CONTRIBUTOR_ID
+     - API_KEY
+     - ADMIN_KEY
+    restart: always
+#awstats:
+#  build: ${WORKSPACE_PARENT}/${WORKSPACE}/docker-awstats
+#  ports:
+#  volumes:
+#   - /opt/bluetree/apacherun:/var/run/apache2
+#    - /opt/glytoucan/awstats/data:/var/lib/awstats
+#    - /opt/glytoucan/apache/www:/var/www/html
+#    - /opt/glytoucan/awstats/logs:/var/log
+#   - /var/log:/var/log
+#   - ${HOME}/${WORKSPACE}/docker-awstats/logs:/var/log/apache2
+#    - /etc/localtime:/etc/localtime         
+  api:
+    extends:
+      file: docker-compose.api.yml
+      service: api
+    links:
+      - user:test.user.ts.glytoucan.org
+#      - admin:test.api.glytoucan.org
+  soap.api:
+    extends:
+      file: docker-compose.soap.api.yml
+      service: soap.api
+  glycanbuilder:
+    extends:
+      file: docker-compose.glycanbuilder.yml
+      service: glycanbuilder
+  stanza:
+    extends:
+      file: docker-compose.stanza.yml
+      service: stanza
+    links:
+      - api:rdf.glytoucan.org
+  js-stanza:
+    extends:
+      file: docker-compose.js-stanza.yml
+      service: js-stanza
+# api.glytoucan.org domain - including /soap 
+  proxy:
+    build: ./docker-apache-api/
+    volumes:
+      - /etc/localtime:/etc/localtime
+      - $HOME/glytoucan/proxy/log:/var/log/apache2
+    links:
+      - api:test.api.glytoucan.org
+      - soap.api:test.soap.api.glytoucan.org
+      - admin:test.admin.api.glytoucan.org
+    ports:
+      - 891:80
+  user:
+    extends: 
+      file: docker-compose.user.yml
+      service: virtuoso
+  admin:
+    extends:
+      file: ./admin/docker-compose.yml
+      service: admin
