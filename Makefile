@@ -14,8 +14,8 @@ rm:
 
 create:
 	#/var/jenkins_home/workspace/docker-compose-glytoucan-build-prod
-	chmod a+x client/wait/wait-for-it.sh
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml rm -f
+#	chmod a+x client/wait/wait-for-it.sh
+#	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} PROJECT=${PROJECT} SETTINGS_PATH=${SETTINGS_PATH} docker-compose -f docker-compose.client.yml rm -f
 #	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.client.yml stop
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.clean.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.clean.yml up --remove-orphans 
