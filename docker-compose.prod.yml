@@ -2,6 +2,8 @@ version: '2'
 services:
   web:
     image: glycoinfo.org:5000/glytoucan_web:v${GTC_VERSION}
+  squid:
+    image: glycoinfo.org:5000/glytoucan_cache:v${GTC_VERSION}
   stanzaredirect:
     build: docker-apache-stanza.redirect
     image: glycoinfo.org:5000/glytoucan_redirect:v${GTC_VERSION}

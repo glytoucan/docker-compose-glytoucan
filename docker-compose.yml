@@ -21,8 +21,8 @@ services:
       service: java
     links:
       - stanza:stanza.glytoucan.org
+      - admin:test.admin.glytoucan.org
       - proxy:test.api.glytoucan.org
-#    - local:local.glytoucan.org
     environment:
      - GOOGLE_OAUTH2_CLIENTID
      - GOOGLE_OAUTH2_CLIENTSECRET
@@ -51,6 +51,7 @@ services:
       service: api
     links:
       - user:test.user.ts.glytoucan.org
+      - admin:test.admin.glytoucan.org
   soap.api:
     extends:
       file: docker-compose.soap.api.yml

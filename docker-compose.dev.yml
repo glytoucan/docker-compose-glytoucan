@@ -27,6 +27,7 @@ services:
       - GTC_VERSION=DEV_VERSION
       - GOOGLE_OAUTH2_CLIENTID=144546288829-o7vr36n5s7it71pi6tandfmsqteq38p3.apps.googleusercontent.com
       - GOOGLE_OAUTH2_CLIENTSECRET=Lpd2gIA6fRMgYuH3dhmrTx-O
+      - ADMIN_URI=http://test.api.glytoucan.org/admin/
     restart: never
   stanza:
     extends:

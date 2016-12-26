@@ -52,3 +52,6 @@
 [submodule "admin"]
 	path = admin
 	url = https://github.com/glytoucan/admin.git
+[submodule "adminClient"]
+	path = adminClient
+	url = https://github.com/glytoucan/adminClient.git
