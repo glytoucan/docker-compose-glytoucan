@@ -1,0 +1,61 @@
+version: '2'
+services:
+  web:
+    image: glytoucan.org:5000/glytoucan_web:v${GTC_VERSION}
+  squid:
+    image: glytoucan.org:5000/glytoucan_cache:v${GTC_VERSION}
+  stanzaredirect:
+    build: docker-apache-stanza.redirect
+    image: glytoucan.org:5000/glytoucan_redirect:v${GTC_VERSION}
+    ports:
+      - 9293:80
+    volumes:
+      - /opt/glytoucan/apache-stanza.redirect/apachelogs:/var/log/apache2
+    restart: always
+  stanza:
+    image: glytoucan.org:5000/glytoucan_stanza:v${GTC_VERSION}
+    links:
+      - stanzaredirect:test.ts.glytoucan.org
+      - api:rdf.glytoucan.org
+    working_dir: /data/glytoucan-stanza
+    volumes_from:
+      - data
+  js-stanza:
+    image: glytoucan.org:5000/glytoucan_js-stanza:v${GTC_VERSION}
+    links:
+      - stanzaredirect:test.ts.glytoucan.org
+    working_dir: /data/glytoucan-js-stanza/glytoucan_stanza/entry_provider
+    volumes_from:
+      - data
+  java:
+    image: java:8u91-jdk
+    working_dir: /data/rdf.glytoucan
+    command: java -jar web-${GTC_VERSION}.jar
+    environment:
+      - sitemapHostname=https://glytoucan.org
+    volumes_from:
+      - data
+  api:
+    image: java:8u91-jdk
+    working_dir: /data/api
+    command: java -jar api-${GTC_VERSION}.jar
+    volumes_from:
+      - data
+  soap.api:
+    image: java:8u91-jdk
+    working_dir: /data/soap.api
+    command: java -jar soap-${GTC_VERSION}.jar
+    volumes_from:
+      - data
+  data:
+    build: docker-data
+    image: glytoucan.org:5000/glytoucan_data:v${GTC_VERSION}
+    command: echo "data ready"
+    volumes:
+      - /data
+  admin:
+    image: java:8u91-jdk
+    working_dir: /data/admin
+    command: java -jar admin-${GTC_VERSION}.jar
+    volumes_from:
+      - data
