@@ -1,5 +1,5 @@
 upgrade:
-	mvn --batch-mode release:update-versions 
+	/bin/bash -i -c 'mvn --batch-mode release:update-versions'
 	#mvn --batch-mode release:update-versions -DdevelopmentVersion=1.2.6-TOCO-SNAPSHOT
 #	mvn --batch-mode release:update-versions -Dversion=1.2.6-TOCO doesntwork
 #	this only upgrades for dev version....
@@ -26,8 +26,14 @@ create:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml rm -f
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml build
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.copy.yml up --remove-orphans 
+
+commit:
 	docker commit glytoucanDataContainerv${GTC_VERSION} glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
 	docker push glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+
+commitprod:
+	docker commit glytoucanDataContainerv${GTC_VERSION} glytoucan.org:5000/glytoucan_data:v${GTC_VERSION}
+	docker push glytoucan.org:5000/glytoucan_data:v${GTC_VERSION}
 
 ls:
 	docker run --rm --volumes-from dockercomposeglytoucan_data_1 aokinobu/debian ls -alrt /data/rdf.glytoucan
@@ -47,6 +53,11 @@ push:
 # remove after pushing
 #	docker rm glytoucanDataContainerv${GTC_VERSION}
 #	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
+
+pushprod:
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.glytoucan.yml build
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.glytoucan.yml create
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.glytoucan.yml push
 
 init:
 	sudo docker run -d -v /opt/jenkins/mysql/lib:/var/lib/mysql:rw -v /opt/jenkins/mysql/etc:/etc/mysql:rw aoki/docker-jenkins /bin/bash -c "/usr/bin/mysql_install_db"
