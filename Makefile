@@ -53,6 +53,7 @@ push:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push glycanbuilder
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push data
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push js-stanza
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push stanza
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push web
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push squid
 # remove after pushing
