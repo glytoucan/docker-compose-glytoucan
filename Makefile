@@ -49,7 +49,12 @@ tag:
 push:
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
 	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${BUILD_WORKSPACE_PARENT} WORKSPACE=${BUILD_WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml create
-	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push stanzaredirect
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push glycanbuilder
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push data
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push js-stanza
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push web
+	GTC_VERSION=${GTC_VERSION} WORKSPACE_PARENT=${WORKSPACE_PARENT} WORKSPACE=${WORKSPACE} docker-compose -f docker-compose.yml -f docker-compose.prod.yml push squid
 # remove after pushing
 #	docker rm glytoucanDataContainerv${GTC_VERSION}
 #	docker rmi glycoinfo.org:5000/glytoucan_data:v${GTC_VERSION}
