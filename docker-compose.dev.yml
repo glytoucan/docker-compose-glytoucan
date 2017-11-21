@@ -10,7 +10,7 @@ services:
 #     - api:test.api.glytoucan.org
      - js-stanza:js-stanza.glytoucan.org
      - java:squid.glytoucan.org
-    restart: never
+    restart: always
   java:
     extends:
       file: docker-compose.java.yml
@@ -28,7 +28,7 @@ services:
       - GOOGLE_OAUTH2_CLIENTID=144546288829-o7vr36n5s7it71pi6tandfmsqteq38p3.apps.googleusercontent.com
       - GOOGLE_OAUTH2_CLIENTSECRET=Lpd2gIA6fRMgYuH3dhmrTx-O
       - ADMIN_URI=http://test.api.glytoucan.org/admin/
-    restart: never
+    restart: always
   stanza:
     extends:
       file: docker-compose.stanza.yml
@@ -46,14 +46,14 @@ services:
 #    environment:
 #      - SPRING_TRIPLESTORE_URL=jdbc:virtuoso://test.ts.glytoucan.org:1111
 #      - SPRING_TRIPLESTORE_PASSWORD=dba
-    restart: never
+    restart: always
     # volumes_from:
     #   - bundle
   js-stanza:
     extends:
       file: docker-compose.js-stanza.yml
       service: js-stanza
-    restart: never
+    restart: always
   # bundle:
   #   image: debian
   #   command: echo bundle path holder
