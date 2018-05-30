@@ -2,7 +2,7 @@ version: '2'
 services:
   glycanbuilder:
     build: docker-glycanbuilder
-#    image: glytoucan_glycanbuilder:v${GTC_VERSION}
+    image: aokinobu/glytoucan_glycanbuilder:v${GTC_VERSION}
     ports:
      - "8080:80"
     volumes:
